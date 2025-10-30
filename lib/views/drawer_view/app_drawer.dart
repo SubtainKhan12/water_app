@@ -4,6 +4,14 @@ import 'package:water_app/views/drawer_view/drawer_expension_tile.dart';
 import 'package:water_app/views/drawer_view/drawer_sub_items.dart';
 import '../../res/colors.dart';
 import '../customer_management/customer_list.dart';
+import '../delivery_management_views/assigne_order.dart';
+import '../delivery_management_views/delivery_staff.dart';
+import '../delivery_management_views/delivery_status.dart';
+import '../delivery_management_views/delivery_zones.dart';
+import '../expense_tracking_views/expense_categories.dart';
+import '../expense_tracking_views/expense_dashboard.dart';
+import '../expense_tracking_views/expense_record.dart';
+import '../expense_tracking_views/salary_dashboard.dart';
 import '../orders_management_view/order_history.dart';
 import '../orders_management_view/view_all_orders.dart';
 import '../product_view/product_catalog_view/add_product.dart';
@@ -45,8 +53,12 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   // Navigator.pop(context);
                   // Navigate to all orders
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => ViewAllOrdersScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ViewAllOrdersScreen(),
+                    ),
+                  );
                 },
               ),
               // DrawerSubItem(
@@ -68,8 +80,12 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   // Navigator.pop(context);
                   // Navigate to order history
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => OrderHistoryScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderHistoryScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -85,8 +101,10 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   // Navigator.pop(context);
                   // Navigate to customer list
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => CustomersScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CustomersScreen()),
+                  );
                 },
               ),
               DrawerSubItem(
@@ -109,8 +127,12 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   // Navigator.pop(context);
                   // Navigate to products
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => ProductCatalogScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductCatalogScreen(),
+                    ),
+                  );
                 },
               ),
               // DrawerSubItem(
@@ -132,8 +154,12 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   // Navigator.pop(context);
                   // Navigate to stock
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => StockManagementScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StockManagementScreen(),
+                    ),
+                  );
                 },
               ),
               DrawerSubItem(
@@ -141,8 +167,12 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   // Navigate to low stock
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => LowStockAlertScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LowStockAlertScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -154,9 +184,26 @@ class AppDrawer extends StatelessWidget {
             title: 'Expense Tracking',
             children: [
               DrawerSubItem(
+                title: 'Expense Dashboard',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ExpenseDashboardScreen(),
+                    ),
+                  );
+                  // Navigate to record expense
+                },
+              ),
+              DrawerSubItem(
                 title: 'Record Expense',
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RecordExpenseScreen(),
+                    ),
+                  );
                   // Navigate to record expense
                 },
               ),
@@ -170,8 +217,12 @@ class AppDrawer extends StatelessWidget {
               DrawerSubItem(
                 title: 'Salary Management',
                 onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to salaries
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SalaryDashboardScreen(),
+                    ),
+                  );
                 },
               ),
               DrawerSubItem(
@@ -191,8 +242,12 @@ class AppDrawer extends StatelessWidget {
               DrawerSubItem(
                 title: 'Expense Categories',
                 onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to categories
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ExpenseCategoriesScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -242,36 +297,48 @@ class AppDrawer extends StatelessWidget {
               DrawerSubItem(
                 title: 'Delivery Staff',
                 onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to staff list
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DeliveryStaffScreen(),
+                    ),
+                  );
                 },
               ),
               DrawerSubItem(
                 title: 'Assign Orders',
                 onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to assign orders
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AssignOrdersScreen(),
+                    ),
+                  );
                 },
               ),
               DrawerSubItem(
                 title: 'Delivery Status',
                 onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to delivery status
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DeliveryStatusScreen(),
+                    ),
+                  );
                 },
               ),
-              DrawerSubItem(
-                title: 'Performance Metrics',
-                onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to performance
-                },
-              ),
+              // DrawerSubItem(
+              //   title: 'Performance Metrics',
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     // Navigate to performance
+              //   },
+              // ),
               DrawerSubItem(
                 title: 'Delivery Zones',
                 onTap: () {
-                  Navigator.pop(context);
-                  // Navigate to zones
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => const DeliveryZonesScreen()));
                 },
               ),
             ],
@@ -317,10 +384,7 @@ class AppDrawer extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppColors.primaryBlue,
-            AppColors.skyBlue,
-          ],
+          colors: [AppColors.primaryBlue, AppColors.skyBlue],
         ),
       ),
       child: Column(
@@ -334,10 +398,7 @@ class AppDrawer extends StatelessWidget {
               color: Colors.white,
               shape: BoxShape.circle,
               boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                ),
+                BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10),
               ],
             ),
             child: const Icon(
@@ -370,7 +431,6 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
-
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -386,10 +446,7 @@ class AppDrawer extends StatelessWidget {
           ),
           content: const Text(
             'Are you sure you want to logout?',
-            style: TextStyle(
-              color: AppColors.DarkBlue,
-              fontFamily: 'Poppins',
-            ),
+            style: TextStyle(color: AppColors.DarkBlue, fontFamily: 'Poppins'),
           ),
           actions: [
             TextButton(
@@ -407,10 +464,11 @@ class AppDrawer extends StatelessWidget {
             TextButton(
               onPressed: () {
                 // Perform logout logic
-                Navigator.pushAndRemoveUntil(context,
+                Navigator.pushAndRemoveUntil(
+                  context,
                   MaterialPageRoute(builder: (context) => LoginScreen()),
-                    (Route<dynamic> route) => false,);
-
+                  (Route<dynamic> route) => false,
+                );
               },
               child: const Text(
                 'Logout',
