@@ -14,7 +14,6 @@ import '../expense_tracking_views/expense_record.dart';
 import '../expense_tracking_views/salary_dashboard.dart';
 import '../orders_management_view/order_history.dart';
 import '../orders_management_view/view_all_orders.dart';
-import '../product_view/product_catalog_view/add_product.dart';
 import '../product_view/product_catalog_view/product_catalog.dart';
 import '../product_view/stock_management/low_stock.dart';
 import '../product_view/stock_management/stock_management.dart';

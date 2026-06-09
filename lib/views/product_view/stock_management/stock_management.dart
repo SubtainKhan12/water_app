@@ -178,24 +178,24 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
     });
   }
 
-  void _bulkRestock(List<String> productIds) {
-    for (final productId in productIds) {
-      final productIndex = _products.indexWhere((p) => p['id'] == productId);
-      if (productIndex != -1) {
-        final minStock = _products[productIndex]['minStock'];
-        final suggestedStock = minStock * 2; // Restock to 2x min stock
-        _products[productIndex]['stock'] = suggestedStock;
-        _products[productIndex]['lastRestocked'] = DateTime.now().toIso8601String().split('T')[0];
-      }
-    }
+  // void _bulkRestock(List<String> productIds) {
+  //   for (final productId in productIds) {
+  //     final productIndex = _products.indexWhere((p) => p['id'] == productId);
+  //     if (productIndex != -1) {
+  //       final minStock = _products[productIndex]['minStock'];
+  //       final suggestedStock = minStock * 2; // Restock to 2x min stock
+  //       _products[productIndex]['stock'] = suggestedStock;
+  //       _products[productIndex]['lastRestocked'] = DateTime.now().toIso8601String().split('T')[0];
+  //     }
+  //   }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Restocked ${productIds.length} products'),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text('Restocked ${productIds.length} products'),
+  //       backgroundColor: Colors.green,
+  //     ),
+  //   );
+  // }
 
   void _showUpdateStockDialog(Map<String, dynamic> product) {
     final stockController = TextEditingController(text: product['stock'].toString());

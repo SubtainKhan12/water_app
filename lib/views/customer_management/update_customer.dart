@@ -48,85 +48,85 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
     setState(() {});
   }
 
-  void _showDeleteConfirmation() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Row(
-          children: [
-            Icon(Icons.warning, color: Colors.orange),
-            SizedBox(width: 8),
-            Text('Delete Customer'),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Are you sure you want to delete ${widget.customer['name']}?',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text('This action cannot be undone. All customer data including order history will be permanently deleted.'),
-            if (widget.customer['totalOrders'] > 0) ...[
-              const SizedBox(height: 12),
-              Text(
-                '⚠️ This customer has ${widget.customer['totalOrders']} orders and has spent \$${widget.customer['totalSpent']}.',
-                style: const TextStyle(
-                  color: Colors.orange,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context); // Close confirmation dialog
-              _deleteCustomer();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text('Delete Customer'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _showDeleteConfirmation() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: const Row(
+  //         children: [
+  //           Icon(Icons.warning, color: Colors.orange),
+  //           SizedBox(width: 8),
+  //           Text('Delete Customer'),
+  //         ],
+  //       ),
+  //       content: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Text(
+  //             'Are you sure you want to delete ${widget.customer['name']}?',
+  //             style: const TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 8),
+  //           const Text('This action cannot be undone. All customer data including order history will be permanently deleted.'),
+  //           if (widget.customer['totalOrders'] > 0) ...[
+  //             const SizedBox(height: 12),
+  //             Text(
+  //               '⚠️ This customer has ${widget.customer['totalOrders']} orders and has spent \$${widget.customer['totalSpent']}.',
+  //               style: const TextStyle(
+  //                 color: Colors.orange,
+  //                 fontSize: 12,
+  //               ),
+  //             ),
+  //           ],
+  //         ],
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context),
+  //           child: const Text('Cancel'),
+  //         ),
+  //         ElevatedButton(
+  //           onPressed: () {
+  //             Navigator.pop(context); // Close confirmation dialog
+  //             _deleteCustomer();
+  //           },
+  //           style: ElevatedButton.styleFrom(
+  //             backgroundColor: Colors.red,
+  //             foregroundColor: Colors.white,
+  //           ),
+  //           child: const Text('Delete Customer'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  void _deleteCustomer() {
-    // Here you would typically delete the customer from your database
-    print('Deleting customer: ${widget.customer['id']}');
+  // void _deleteCustomer() {
+  //   // Here you would typically delete the customer from your database
+  //   print('Deleting customer: ${widget.customer['id']}');
 
-    // Show deletion in progress
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Deleting customer...'),
-        backgroundColor: Colors.orange,
-      ),
-    );
+  //   // Show deletion in progress
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     const SnackBar(
+  //       content: Text('Deleting customer...'),
+  //       backgroundColor: Colors.orange,
+  //     ),
+  //   );
 
-    // Simulate API call delay
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pop(context, 'deleted'); // Return to customer list with deletion signal
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${widget.customer['name']} has been deleted'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    });
-  }
+  //   // Simulate API call delay
+  //   Future.delayed(const Duration(seconds: 2), () {
+  //     Navigator.pop(context, 'deleted'); // Return to customer list with deletion signal
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text('${widget.customer['name']} has been deleted'),
+  //         backgroundColor: Colors.green,
+  //       ),
+  //     );
+  //   });
+  // }
 
   void _showQuickStats() {
     showModalBottomSheet(

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-
 import '../../res/colors.dart';
 import '../../res/validator.dart';
-import '../../res/widgets/auto_capitalized_textfield.dart';
 import '../../res/widgets/round_button.dart';
 import '../splash_views/wavy_painter.dart';
 

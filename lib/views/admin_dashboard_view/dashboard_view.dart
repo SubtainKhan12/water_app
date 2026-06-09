@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../res/colors.dart';
-import '../../res/widgets/round_button.dart';
 import '../drawer_view/app_drawer.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -12,8 +11,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  String _selectedPeriod = 'Monthly';
-  final List<String> _periods = ['Daily', 'Weekly', 'Monthly'];
+  // String _selectedPeriod = 'Monthly';
+  // final List<String> _periods = ['Daily', 'Weekly', 'Monthly'];
 
   // Dashboard Summary Data
   final Map<String, dynamic> _dashboardData = {
@@ -183,51 +182,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildPeriodSelector() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          'Business Overview',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: AppColors.DarkBlue,
-          ),
-        ),
-        Container(
-          height: 35,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: AppColors.lightSkyBlue),
-          ),
-          child: DropdownButton<String>(
-            value: _selectedPeriod,
-            underline: const SizedBox(),
-            items: _periods.map((String period) {
-              return DropdownMenuItem<String>(
-                value: period,
-                child: Text(
-                  period,
-                  style: const TextStyle(
-                    color: AppColors.primaryBlue,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                _selectedPeriod = newValue!;
-              });
-            },
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildPeriodSelector() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: [
+  //       const Text(
+  //         'Business Overview',
+  //         style: TextStyle(
+  //           fontSize: 20,
+  //           fontWeight: FontWeight.bold,
+  //           color: AppColors.DarkBlue,
+  //         ),
+  //       ),
+  //       Container(
+  //         height: 35,
+  //         padding: const EdgeInsets.symmetric(horizontal: 12),
+  //         decoration: BoxDecoration(
+  //           color: Colors.white,
+  //           borderRadius: BorderRadius.circular(8),
+  //           border: Border.all(color: AppColors.lightSkyBlue),
+  //         ),
+  //         child: DropdownButton<String>(
+  //           value: _selectedPeriod,
+  //           underline: const SizedBox(),
+  //           items: _periods.map((String period) {
+  //             return DropdownMenuItem<String>(
+  //               value: period,
+  //               child: Text(
+  //                 period,
+  //                 style: const TextStyle(
+  //                   color: AppColors.primaryBlue,
+  //                   fontWeight: FontWeight.w500,
+  //                 ),
+  //               ),
+  //             );
+  //           }).toList(),
+  //           onChanged: (String? newValue) {
+  //             setState(() {
+  //               _selectedPeriod = newValue!;
+  //             });
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildQuickStats() {
     return GridView.builder(

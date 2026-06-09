@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:water_app/views/customer_management/update_customer.dart';
 import '../../res/colors.dart';
-import '../../res/widgets/round_button.dart';
 
 class CustomerDetailsScreen extends StatefulWidget {
   final Map<String, dynamic> customer;

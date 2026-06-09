@@ -14,7 +14,7 @@ class _AddSalaryScreenState extends State<AddSalaryScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _salaryController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _joinDateController = TextEditingController();
+  // final TextEditingController _joinDateController = TextEditingController();
 
   String _selectedRole = 'Delivery Staff';
   String _selectedPaymentMethod = 'Bank Transfer';
