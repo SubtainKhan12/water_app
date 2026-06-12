@@ -336,8 +336,12 @@ class AppDrawer extends StatelessWidget {
               DrawerSubItem(
                 title: 'Delivery Zones',
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => const DeliveryZonesScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DeliveryZonesScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -397,7 +401,10 @@ class AppDrawer extends StatelessWidget {
               color: Colors.white,
               shape: BoxShape.circle,
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10),
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 10,
+                ),
               ],
             ),
             child: const Icon(

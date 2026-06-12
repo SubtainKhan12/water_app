@@ -166,13 +166,15 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: _isSearching ? _buildSearchField() : const Text(
-          'Order History',
-          style: TextStyle(
-            color: AppColors.primaryBlue,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: _isSearching
+            ? _buildSearchField()
+            : const Text(
+                'Order History',
+                style: TextStyle(
+                  color: AppColors.primaryBlue,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
         backgroundColor: Colors.white,
         elevation: 1,
         actions: _buildAppBarActions(),
@@ -219,19 +221,19 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           hintText: 'Search orders...',
           hintStyle: const TextStyle(color: Colors.grey),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
-            icon: const Icon(Icons.clear, size: 20),
-            onPressed: _clearSearch,
-            color: AppColors.primaryBlue,
-          )
+                  icon: const Icon(Icons.clear, size: 20),
+                  onPressed: _clearSearch,
+                  color: AppColors.primaryBlue,
+                )
               : null,
         ),
-        style: const TextStyle(
-          color: AppColors.DarkBlue,
-          fontSize: 16,
-        ),
+        style: const TextStyle(color: AppColors.DarkBlue, fontSize: 16),
       ),
     );
   }
@@ -307,7 +309,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         headingRowColor: MaterialStateProperty.all(
-          AppColors.primaryBlue.withOpacity(0.1),
+          AppColors.primaryBlue.withValues(alpha: 0.1),
         ),
         headingTextStyle: const TextStyle(
           fontWeight: FontWeight.bold,
@@ -345,9 +347,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               DataCell(Text("\$${order['totalAmount']}")),
               DataCell(
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: _getStatusColor(order['status']).withOpacity(0.1),
+                    color: _getStatusColor(
+                      order['status'],
+                    ).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: _getStatusColor(order['status'])),
                   ),

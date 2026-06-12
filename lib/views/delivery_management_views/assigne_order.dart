@@ -145,7 +145,7 @@ class _AssignOrdersScreenState extends State<AssignOrdersScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: priorityColor.withOpacity(0.1),
+                    color: priorityColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: priorityColor),
                   ),
@@ -264,7 +264,7 @@ class _AssignOrdersScreenState extends State<AssignOrdersScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
           ),
         ],
@@ -278,7 +278,7 @@ class _AssignOrdersScreenState extends State<AssignOrdersScreen> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AppColors.skyBlue.withOpacity(0.2),
+                  color: AppColors.skyBlue.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

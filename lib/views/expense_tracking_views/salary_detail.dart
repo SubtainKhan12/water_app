@@ -34,10 +34,7 @@ class _SalaryDetailsScreenState extends State<SalaryDetailsScreen> {
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
         actions: [
-          IconButton(
-            onPressed: _editStaff,
-            icon: const Icon(Icons.edit),
-          ),
+          IconButton(onPressed: _editStaff, icon: const Icon(Icons.edit)),
         ],
       ),
       body: Padding(
@@ -75,14 +72,10 @@ class _SalaryDetailsScreenState extends State<SalaryDetailsScreen> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: AppColors.skyBlue.withOpacity(0.2),
+                color: AppColors.skyBlue.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.person,
-                color: AppColors.primaryBlue,
-                size: 30,
-              ),
+              child: Icon(Icons.person, color: AppColors.primaryBlue, size: 30),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -108,9 +101,7 @@ class _SalaryDetailsScreenState extends State<SalaryDetailsScreen> {
                   const SizedBox(height: 4),
                   Text(
                     widget.staff['phone'],
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                    ),
+                    style: const TextStyle(fontFamily: 'Poppins'),
                   ),
                 ],
               ),
@@ -193,9 +184,14 @@ class _SalaryDetailsScreenState extends State<SalaryDetailsScreen> {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
-                    color: _isPaid ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                    color: _isPaid
+                        ? Colors.green.withValues(alpha: 0.1)
+                        : Colors.orange.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: _isPaid ? Colors.green : Colors.orange,

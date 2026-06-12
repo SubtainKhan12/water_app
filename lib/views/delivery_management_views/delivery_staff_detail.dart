@@ -8,10 +8,12 @@ class DeliveryStaffDetailsScreen extends StatefulWidget {
   const DeliveryStaffDetailsScreen({super.key, required this.staff});
 
   @override
-  State<DeliveryStaffDetailsScreen> createState() => _DeliveryStaffDetailsScreenState();
+  State<DeliveryStaffDetailsScreen> createState() =>
+      _DeliveryStaffDetailsScreenState();
 }
 
-class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen> {
+class _DeliveryStaffDetailsScreenState
+    extends State<DeliveryStaffDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +28,7 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
         actions: [
-          IconButton(
-            onPressed: _editStaff,
-            icon: const Icon(Icons.edit),
-          ),
+          IconButton(onPressed: _editStaff, icon: const Icon(Icons.edit)),
         ],
       ),
       body: Padding(
@@ -65,7 +64,7 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: AppColors.skyBlue.withOpacity(0.2),
+                    color: AppColors.skyBlue.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -90,9 +89,7 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
                       const SizedBox(height: 4),
                       Text(
                         widget.staff['phone'],
-                        style: const TextStyle(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: const TextStyle(fontFamily: 'Poppins'),
                       ),
                       Text(
                         widget.staff['vehicle'],
@@ -105,9 +102,12 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.1),
+                    color: Colors.green.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.green),
                   ),
@@ -130,7 +130,10 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildInfoItem('Delivery Zone', widget.staff['zone']),
-                _buildInfoItem('Total Orders', '${widget.staff['ordersToday']} today'),
+                _buildInfoItem(
+                  'Total Orders',
+                  '${widget.staff['ordersToday']} today',
+                ),
                 _buildInfoItem('Rating', '${widget.staff['rating']} ⭐'),
               ],
             ),
@@ -183,7 +186,12 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildStatItem('Completed', '156', Icons.check_circle, Colors.green),
+                _buildStatItem(
+                  'Completed',
+                  '156',
+                  Icons.check_circle,
+                  Colors.green,
+                ),
                 _buildStatItem('Pending', '8', Icons.pending, Colors.orange),
                 _buildStatItem('Cancelled', '3', Icons.cancel, Colors.red),
               ],
@@ -194,14 +202,19 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
     );
   }
 
-  Widget _buildStatItem(String label, String value, IconData icon, Color color) {
+  Widget _buildStatItem(
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Column(
       children: [
         Container(
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, color: color, size: 24),
@@ -256,11 +269,31 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
 
   Widget _buildOrderItem(int index) {
     List<Map<String, dynamic>> sampleOrders = [
-      {'status': 'Delivered', 'address': 'House 123, Street 5, Gulberg', 'time': '10:30 AM'},
-      {'status': 'In Progress', 'address': 'Office 45, Main Boulevard', 'time': '11:15 AM'},
-      {'status': 'Pending', 'address': 'Shop 67, Market Road', 'time': '12:00 PM'},
-      {'status': 'Delivered', 'address': 'Apartment 89, Garden Town', 'time': '09:45 AM'},
-      {'status': 'In Progress', 'address': 'House 21, Model Town', 'time': '01:30 PM'},
+      {
+        'status': 'Delivered',
+        'address': 'House 123, Street 5, Gulberg',
+        'time': '10:30 AM',
+      },
+      {
+        'status': 'In Progress',
+        'address': 'Office 45, Main Boulevard',
+        'time': '11:15 AM',
+      },
+      {
+        'status': 'Pending',
+        'address': 'Shop 67, Market Road',
+        'time': '12:00 PM',
+      },
+      {
+        'status': 'Delivered',
+        'address': 'Apartment 89, Garden Town',
+        'time': '09:45 AM',
+      },
+      {
+        'status': 'In Progress',
+        'address': 'House 21, Model Town',
+        'time': '01:30 PM',
+      },
     ];
 
     final order = sampleOrders[index];
@@ -273,7 +306,7 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: statusColor.withOpacity(0.1),
+            color: statusColor.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -303,16 +336,13 @@ class _DeliveryStaffDetailsScreenState extends State<DeliveryStaffDetailsScreen>
           children: [
             Text(
               order['time'],
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 12,
-              ),
+              style: const TextStyle(fontFamily: 'Poppins', fontSize: 12),
             ),
             const SizedBox(height: 4),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: statusColor.withOpacity(0.1),
+                color: statusColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(

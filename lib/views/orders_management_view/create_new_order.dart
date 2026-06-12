@@ -13,9 +13,12 @@ class CreateNewOrderScreen extends StatefulWidget {
 class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _customerNameController = TextEditingController();
-  final TextEditingController _customerPhoneController = TextEditingController();
-  final TextEditingController _customerAddressController = TextEditingController();
-  final TextEditingController _specialInstructionsController = TextEditingController();
+  final TextEditingController _customerPhoneController =
+      TextEditingController();
+  final TextEditingController _customerAddressController =
+      TextEditingController();
+  final TextEditingController _specialInstructionsController =
+      TextEditingController();
 
   // Sample products data
   final List<Map<String, dynamic>> _products = [
@@ -89,7 +92,9 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
   }
 
   void _addProduct(Map<String, dynamic> product) {
-    final existingIndex = _selectedProducts.indexWhere((p) => p['id'] == product['id']);
+    final existingIndex = _selectedProducts.indexWhere(
+      (p) => p['id'] == product['id'],
+    );
 
     if (existingIndex != -1) {
       setState(() {
@@ -121,7 +126,9 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
     }
 
     setState(() {
-      final productIndex = _selectedProducts.indexWhere((p) => p['id'] == productId);
+      final productIndex = _selectedProducts.indexWhere(
+        (p) => p['id'] == productId,
+      );
       if (productIndex != -1) {
         _selectedProducts[productIndex]['quantity'] = quantity;
       }
@@ -203,9 +210,13 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
           children: [
             Text('Customer: ${_customerNameController.text}'),
             Text('Total Amount: \$$_totalAmount'),
-            Text('Delivery: ${_formatDate(_selectedDeliveryDate)} at ${_selectedDeliveryTime.format(context)}'),
+            Text(
+              'Delivery: ${_formatDate(_selectedDeliveryDate)} at ${_selectedDeliveryTime.format(context)}',
+            ),
             const SizedBox(height: 16),
-            const Text('The order has been created and is pending confirmation.'),
+            const Text(
+              'The order has been created and is pending confirmation.',
+            ),
           ],
         ),
         actions: [
@@ -305,7 +316,10 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
                     const SizedBox(height: 24),
 
                     // Delivery Information
-                    _buildSectionHeader('Delivery Information', Icons.local_shipping),
+                    _buildSectionHeader(
+                      'Delivery Information',
+                      Icons.local_shipping,
+                    ),
                     _buildDeliveryForm(),
 
                     const SizedBox(height: 24),
@@ -359,7 +373,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -443,7 +457,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
   Widget _buildProductCard(Map<String, dynamic> product) {
     final isOutOfStock = product['stock'] <= 0;
     final selectedProduct = _selectedProducts.firstWhere(
-          (p) => p['id'] == product['id'],
+      (p) => p['id'] == product['id'],
       orElse: () => {},
     );
 
@@ -513,7 +527,10 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
                       ),
                       if (selectedProduct.isNotEmpty)
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.primaryBlue,
                             borderRadius: BorderRadius.circular(10),
@@ -546,7 +563,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -564,7 +581,9 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          ..._selectedProducts.map((product) => _buildSelectedProductItem(product)).toList(),
+          ..._selectedProducts
+              .map((product) => _buildSelectedProductItem(product))
+              .toList(),
           const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(12),
@@ -621,10 +640,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
                 ),
                 Text(
                   '\$${product['price']} each',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
               ],
             ),
@@ -634,12 +650,18 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
               IconButton(
                 icon: const Icon(Icons.remove, size: 18),
                 onPressed: () {
-                  _updateProductQuantity(product['id'], product['quantity'] - 1);
+                  _updateProductQuantity(
+                    product['id'],
+                    product['quantity'] - 1,
+                  );
                 },
                 color: AppColors.primaryBlue,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(6),
@@ -657,11 +679,16 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
                 icon: const Icon(Icons.add, size: 18),
                 onPressed: () {
                   if (product['quantity'] < product['stock']) {
-                    _updateProductQuantity(product['id'], product['quantity'] + 1);
+                    _updateProductQuantity(
+                      product['id'],
+                      product['quantity'] + 1,
+                    );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Only ${product['stock']} items available in stock'),
+                        content: Text(
+                          'Only ${product['stock']} items available in stock',
+                        ),
                         backgroundColor: Colors.orange,
                       ),
                     );
@@ -690,7 +717,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -778,10 +805,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
               border: OutlineInputBorder(),
             ),
             items: _deliveryAgents.map((String agent) {
-              return DropdownMenuItem<String>(
-                value: agent,
-                child: Text(agent),
-              );
+              return DropdownMenuItem<String>(value: agent, child: Text(agent));
             }).toList(),
             onChanged: (String? newValue) {
               setState(() {
@@ -802,7 +826,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -816,10 +840,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
           border: OutlineInputBorder(),
         ),
         items: _paymentMethods.map((String method) {
-          return DropdownMenuItem<String>(
-            value: method,
-            child: Text(method),
-          );
+          return DropdownMenuItem<String>(value: method, child: Text(method));
         }).toList(),
         onChanged: (String? newValue) {
           setState(() {
@@ -838,7 +859,7 @@ class _CreateNewOrderScreenState extends State<CreateNewOrderScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),

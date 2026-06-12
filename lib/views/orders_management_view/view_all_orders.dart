@@ -13,8 +13,20 @@ class ViewAllOrdersScreen extends StatefulWidget {
 class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
   String _selectedFilter = 'All';
   String _selectedSort = 'Newest First';
-  final List<String> _filters = ['All', 'Pending', 'Confirmed', 'Out for Delivery', 'Delivered', 'Cancelled'];
-  final List<String> _sortOptions = ['Newest First', 'Oldest First', 'Price: High to Low', 'Price: Low to High'];
+  final List<String> _filters = [
+    'All',
+    'Pending',
+    'Confirmed',
+    'Out for Delivery',
+    'Delivered',
+    'Cancelled',
+  ];
+  final List<String> _sortOptions = [
+    'Newest First',
+    'Oldest First',
+    'Price: High to Low',
+    'Price: Low to High',
+  ];
 
   // Search functionality
   bool _isSearching = false;
@@ -163,7 +175,6 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
     });
   }
 
-
   void _closeSearch() {
     setState(() {
       _isSearching = false;
@@ -263,31 +274,64 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildStatusOption(orderId, 'pending', 'Pending Confirmation', currentStatus),
-            _buildStatusOption(orderId, 'confirmed', 'Confirmed', currentStatus),
-            _buildStatusOption(orderId, 'out_for_delivery', 'Out for Delivery', currentStatus),
-            _buildStatusOption(orderId, 'delivered', 'Delivered', currentStatus),
-            _buildStatusOption(orderId, 'cancelled', 'Cancelled', currentStatus),
+            _buildStatusOption(
+              orderId,
+              'pending',
+              'Pending Confirmation',
+              currentStatus,
+            ),
+            _buildStatusOption(
+              orderId,
+              'confirmed',
+              'Confirmed',
+              currentStatus,
+            ),
+            _buildStatusOption(
+              orderId,
+              'out_for_delivery',
+              'Out for Delivery',
+              currentStatus,
+            ),
+            _buildStatusOption(
+              orderId,
+              'delivered',
+              'Delivered',
+              currentStatus,
+            ),
+            _buildStatusOption(
+              orderId,
+              'cancelled',
+              'Cancelled',
+              currentStatus,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildStatusOption(String orderId, String status, String text, String currentStatus) {
+  Widget _buildStatusOption(
+    String orderId,
+    String status,
+    String text,
+    String currentStatus,
+  ) {
     return ListTile(
-      leading: Icon(
-        _getStatusIcon(status),
-        color: _getStatusColor(status),
-      ),
+      leading: Icon(_getStatusIcon(status), color: _getStatusColor(status)),
       title: Text(
         text,
         style: TextStyle(
-          color: currentStatus == status ? AppColors.primaryBlue : AppColors.DarkBlue,
-          fontWeight: currentStatus == status ? FontWeight.bold : FontWeight.normal,
+          color: currentStatus == status
+              ? AppColors.primaryBlue
+              : AppColors.DarkBlue,
+          fontWeight: currentStatus == status
+              ? FontWeight.bold
+              : FontWeight.normal,
         ),
       ),
-      trailing: currentStatus == status ? const Icon(Icons.check, color: AppColors.primaryBlue) : null,
+      trailing: currentStatus == status
+          ? const Icon(Icons.check, color: AppColors.primaryBlue)
+          : null,
       onTap: () => _updateOrderStatus(orderId, status),
     );
   }
@@ -307,12 +351,12 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
         title: _isSearching
             ? _buildSearchField()
             : const Text(
-          'All Orders',
-          style: TextStyle(
-            color: AppColors.primaryBlue,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+                'All Orders',
+                style: TextStyle(
+                  color: AppColors.primaryBlue,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
         backgroundColor: Colors.white,
         elevation: 0,
         actions: _buildAppBarActions(),
@@ -326,15 +370,16 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
           _buildOrdersCount(),
 
           // Orders List
-          Expanded(
-            child: _buildOrdersList(),
-          ),
+          Expanded(child: _buildOrdersList()),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Navigate to create new order
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateNewOrderScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateNewOrderScreen()),
+          );
         },
         backgroundColor: AppColors.primaryBlue,
         child: const Icon(Icons.add, color: Colors.white),
@@ -381,19 +426,19 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
           hintText: 'Search orders...',
           hintStyle: const TextStyle(color: Colors.grey),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
-            icon: const Icon(Icons.clear, size: 20),
-            onPressed: _clearSearch,
-            color: AppColors.primaryBlue,
-          )
+                  icon: const Icon(Icons.clear, size: 20),
+                  onPressed: _clearSearch,
+                  color: AppColors.primaryBlue,
+                )
               : null,
         ),
-        style: const TextStyle(
-          color: AppColors.DarkBlue,
-          fontSize: 16,
-        ),
+        style: const TextStyle(color: AppColors.DarkBlue, fontSize: 16),
       ),
     );
   }
@@ -494,10 +539,7 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
           if (_searchQuery.isNotEmpty)
             Text(
               'Search: "$_searchQuery"',
-              style: const TextStyle(
-                color: AppColors.skyBlue,
-                fontSize: 12,
-              ),
+              style: const TextStyle(color: AppColors.skyBlue, fontSize: 12),
             ),
           Text(
             'Total: \$${_getTotalAmount()}',
@@ -535,19 +577,14 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
               _searchQuery.isNotEmpty
                   ? 'No orders found for "$_searchQuery"'
                   : 'No orders available',
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-              ),
+              style: const TextStyle(color: Colors.grey, fontSize: 16),
             ),
             if (_searchQuery.isNotEmpty)
               TextButton(
                 onPressed: _clearSearch,
                 child: const Text(
                   'Clear search',
-                  style: TextStyle(
-                    color: AppColors.primaryBlue,
-                  ),
+                  style: TextStyle(color: AppColors.primaryBlue),
                 ),
               ),
           ],
@@ -591,11 +628,18 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
-                      color: _getStatusColor(order['status']).withOpacity(0.1),
+                      color: _getStatusColor(
+                        order['status'],
+                      ).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: _getStatusColor(order['status'])),
+                      border: Border.all(
+                        color: _getStatusColor(order['status']),
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -624,7 +668,11 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
               // Customer Info
               Row(
                 children: [
-                  const Icon(Icons.person, size: 16, color: AppColors.primaryBlue),
+                  const Icon(
+                    Icons.person,
+                    size: 16,
+                    color: AppColors.primaryBlue,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -642,15 +690,16 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
               // Products
               Row(
                 children: [
-                  const Icon(Icons.inventory, size: 16, color: AppColors.primaryBlue),
+                  const Icon(
+                    Icons.inventory,
+                    size: 16,
+                    color: AppColors.primaryBlue,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       order['products'],
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -662,14 +711,15 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
               // Order Date
               Row(
                 children: [
-                  const Icon(Icons.calendar_today, size: 16, color: AppColors.primaryBlue),
+                  const Icon(
+                    Icons.calendar_today,
+                    size: 16,
+                    color: AppColors.primaryBlue,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     order['orderDate'],
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
               ),
@@ -691,7 +741,10 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.edit, size: 18),
-                        onPressed: () => _showStatusUpdateDialog(order['id'], order['status']),
+                        onPressed: () => _showStatusUpdateDialog(
+                          order['id'],
+                          order['status'],
+                        ),
                         color: AppColors.primaryBlue,
                       ),
                       IconButton(
@@ -709,6 +762,7 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
       ),
     );
   }
+
   Widget _buildOrderDetailsSheet(Map<String, dynamic> order) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.85,
@@ -748,9 +802,14 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: _getStatusColor(order['status']).withOpacity(0.1),
+                  color: _getStatusColor(
+                    order['status'],
+                  ).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: _getStatusColor(order['status'])),
                 ),
@@ -772,41 +831,32 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Order Information
-                  _buildDetailSection(
-                    'Order Information',
-                    Icons.receipt,
-                    [
-                      _buildDetailItem('Order ID', order['id']),
-                      _buildDetailItem('Order Date', order['orderDate']),
-                      _buildDetailItem('Delivery Date', order['deliveryDate']),
-                      _buildDetailItem('Total Amount', '\$${order['totalAmount']}'),
-                      _buildDetailItem('Payment Method', order['paymentMethod']),
-                    ],
-                  ),
+                  _buildDetailSection('Order Information', Icons.receipt, [
+                    _buildDetailItem('Order ID', order['id']),
+                    _buildDetailItem('Order Date', order['orderDate']),
+                    _buildDetailItem('Delivery Date', order['deliveryDate']),
+                    _buildDetailItem(
+                      'Total Amount',
+                      '\$${order['totalAmount']}',
+                    ),
+                    _buildDetailItem('Payment Method', order['paymentMethod']),
+                  ]),
 
                   const SizedBox(height: 24),
 
                   // Customer Information
-                  _buildDetailSection(
-                    'Customer Information',
-                    Icons.person,
-                    [
-                      _buildDetailItem('Customer Name', order['customerName']),
-                      _buildDetailItem('Phone', order['customerPhone']),
-                      _buildDetailItem('Delivery Address', order['address']),
-                    ],
-                  ),
+                  _buildDetailSection('Customer Information', Icons.person, [
+                    _buildDetailItem('Customer Name', order['customerName']),
+                    _buildDetailItem('Phone', order['customerPhone']),
+                    _buildDetailItem('Delivery Address', order['address']),
+                  ]),
 
                   const SizedBox(height: 24),
 
                   // Products
-                  _buildDetailSection(
-                    'Products',
-                    Icons.inventory,
-                    [
-                      _buildDetailItem('Items', order['products']),
-                    ],
-                  ),
+                  _buildDetailSection('Products', Icons.inventory, [
+                    _buildDetailItem('Items', order['products']),
+                  ]),
 
                   const SizedBox(height: 24),
 
@@ -815,7 +865,10 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
                     'Delivery Information',
                     Icons.local_shipping,
                     [
-                      _buildDetailItem('Delivery Agent', order['deliveryAgent']),
+                      _buildDetailItem(
+                        'Delivery Agent',
+                        order['deliveryAgent'],
+                      ),
                     ],
                   ),
                 ],
@@ -854,7 +907,11 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
     );
   }
 
-  Widget _buildDetailSection(String title, IconData icon, List<Widget> children) {
+  Widget _buildDetailSection(
+    String title,
+    IconData icon,
+    List<Widget> children,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -895,12 +952,7 @@ class _ViewAllOrdersScreenState extends State<ViewAllOrdersScreen> {
             ),
           ),
           Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(
-                color: Colors.grey,
-              ),
-            ),
+            child: Text(value, style: const TextStyle(color: Colors.grey)),
           ),
         ],
       ),

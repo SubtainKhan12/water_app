@@ -47,14 +47,23 @@ class _EditDeliveryZoneScreenState extends State<EditDeliveryZoneScreen> {
   void _initializeControllers() {
     _nameController = TextEditingController(text: widget.zone['name']);
     _areaController = TextEditingController(text: widget.zone['area']);
-    _deliveryTimeController = TextEditingController(text: widget.zone['deliveryTime']);
+    _deliveryTimeController = TextEditingController(
+      text: widget.zone['deliveryTime'],
+    );
 
     // Remove 'PKR ' prefix from delivery charge
-    final deliveryCharge = widget.zone['deliveryCharge'].toString().replaceAll('PKR ', '');
+    final deliveryCharge = widget.zone['deliveryCharge'].toString().replaceAll(
+      'PKR ',
+      '',
+    );
     _deliveryChargeController = TextEditingController(text: deliveryCharge);
 
-    _activeStaffController = TextEditingController(text: widget.zone['activeStaff'].toString());
-    _totalOrdersController = TextEditingController(text: widget.zone['totalOrders'].toString());
+    _activeStaffController = TextEditingController(
+      text: widget.zone['activeStaff'].toString(),
+    );
+    _totalOrdersController = TextEditingController(
+      text: widget.zone['totalOrders'].toString(),
+    );
     _areaInputController = TextEditingController();
 
     _selectedStatus = widget.zone['status'];
@@ -88,10 +97,7 @@ class _EditDeliveryZoneScreenState extends State<EditDeliveryZoneScreen> {
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
         actions: [
-          IconButton(
-            onPressed: _updateZone,
-            icon: const Icon(Icons.save),
-          ),
+          IconButton(onPressed: _updateZone, icon: const Icon(Icons.save)),
         ],
       ),
       body: Padding(
@@ -367,7 +373,7 @@ class _EditDeliveryZoneScreenState extends State<EditDeliveryZoneScreen> {
               onPressed: _addArea,
               icon: const Icon(Icons.add, color: AppColors.primaryBlue),
               style: IconButton.styleFrom(
-                backgroundColor: AppColors.primaryBlue.withOpacity(0.1),
+                backgroundColor: AppColors.primaryBlue.withValues(alpha: 0.1),
               ),
             ),
           ],
@@ -384,11 +390,8 @@ class _EditDeliveryZoneScreenState extends State<EditDeliveryZoneScreen> {
       runSpacing: 4,
       children: _areas.map((area) {
         return Chip(
-          label: Text(
-            area,
-            style: const TextStyle(fontFamily: 'Poppins'),
-          ),
-          backgroundColor: AppColors.skyBlue.withOpacity(0.2),
+          label: Text(area, style: const TextStyle(fontFamily: 'Poppins')),
+          backgroundColor: AppColors.skyBlue.withValues(alpha: 0.2),
           deleteIcon: const Icon(Icons.close, size: 16),
           onDeleted: () => _removeArea(area),
         );
@@ -402,9 +405,7 @@ class _EditDeliveryZoneScreenState extends State<EditDeliveryZoneScreen> {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryBlue,
         padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
       child: const Text(
         'Update Delivery Zone',

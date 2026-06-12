@@ -65,10 +65,7 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
       appBar: AppBar(
         title: const Text(
           'Delivery Staff',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
@@ -96,7 +93,9 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddDeliveryStaffScreen()),
+            MaterialPageRoute(
+              builder: (context) => const AddDeliveryStaffScreen(),
+            ),
           );
         },
         backgroundColor: AppColors.primaryBlue,
@@ -142,7 +141,12 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
     );
   }
 
-  Widget _buildSummaryCard(String title, String value, IconData icon, Color color) {
+  Widget _buildSummaryCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -150,10 +154,7 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 4),
         ],
       ),
       child: Column(
@@ -207,14 +208,10 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: AppColors.skyBlue.withOpacity(0.2),
+            color: AppColors.skyBlue.withValues(alpha: 0.2),
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            Icons.person,
-            color: AppColors.primaryBlue,
-            size: 24,
-          ),
+          child: Icon(Icons.person, color: AppColors.primaryBlue, size: 24),
         ),
         title: Text(
           staff['name'],
@@ -252,7 +249,7 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: statusColor.withOpacity(0.1),
+                color: statusColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: statusColor),
               ),
@@ -340,10 +337,7 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
   Widget _buildFilterOption(String text, bool value) {
     return Row(
       children: [
-        Checkbox(
-          value: value,
-          onChanged: (bool? newValue) {},
-        ),
+        Checkbox(value: value, onChanged: (bool? newValue) {}),
         Text(text, style: const TextStyle(fontFamily: 'Poppins')),
       ],
     );

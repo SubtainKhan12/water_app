@@ -11,7 +11,13 @@ class DeliveryStatusScreen extends StatefulWidget {
 
 class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
   String _selectedFilter = 'All';
-  final List<String> _filters = ['All', 'Pending', 'In Progress', 'Delivered', 'Cancelled'];
+  final List<String> _filters = [
+    'All',
+    'Pending',
+    'In Progress',
+    'Delivered',
+    'Cancelled',
+  ];
 
   final List<Map<String, dynamic>> _deliveries = [
     {
@@ -80,16 +86,15 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
   Widget build(BuildContext context) {
     final filteredDeliveries = _selectedFilter == 'All'
         ? _deliveries
-        : _deliveries.where((delivery) => delivery['status'] == _selectedFilter).toList();
+        : _deliveries
+              .where((delivery) => delivery['status'] == _selectedFilter)
+              .toList();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Delivery Status',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
@@ -127,7 +132,9 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
                 filter,
                 style: TextStyle(
                   fontFamily: 'Poppins',
-                  color: _selectedFilter == filter ? Colors.white : AppColors.primaryBlue,
+                  color: _selectedFilter == filter
+                      ? Colors.white
+                      : AppColors.primaryBlue,
                 ),
               ),
               selected: _selectedFilter == filter,
@@ -148,9 +155,15 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
   }
 
   Widget _buildSummaryCards() {
-    final pendingCount = _deliveries.where((d) => d['status'] == 'Pending').length;
-    final inProgressCount = _deliveries.where((d) => d['status'] == 'In Progress').length;
-    final deliveredCount = _deliveries.where((d) => d['status'] == 'Delivered').length;
+    final pendingCount = _deliveries
+        .where((d) => d['status'] == 'Pending')
+        .length;
+    final inProgressCount = _deliveries
+        .where((d) => d['status'] == 'In Progress')
+        .length;
+    final deliveredCount = _deliveries
+        .where((d) => d['status'] == 'Delivered')
+        .length;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -158,22 +171,42 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
       child: Row(
         children: [
           Expanded(
-            child: _buildSummaryCard('Pending', pendingCount.toString(), Icons.pending, Colors.orange),
+            child: _buildSummaryCard(
+              'Pending',
+              pendingCount.toString(),
+              Icons.pending,
+              Colors.orange,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: _buildSummaryCard('In Progress', inProgressCount.toString(), Icons.directions_bike, Colors.blue),
+            child: _buildSummaryCard(
+              'In Progress',
+              inProgressCount.toString(),
+              Icons.directions_bike,
+              Colors.blue,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: _buildSummaryCard('Delivered', deliveredCount.toString(), Icons.check_circle, Colors.green),
+            child: _buildSummaryCard(
+              'Delivered',
+              deliveredCount.toString(),
+              Icons.check_circle,
+              Colors.green,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSummaryCard(String title, String value, IconData icon, Color color) {
+  Widget _buildSummaryCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -181,10 +214,7 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 4),
         ],
       ),
       child: Column(
@@ -249,9 +279,12 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.1),
+                    color: statusColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: statusColor),
                   ),
@@ -298,20 +331,14 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
                 const SizedBox(width: 4),
                 Text(
                   'Staff: ${delivery['deliveryStaff']}',
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(fontFamily: 'Poppins', fontSize: 12),
                 ),
                 const Spacer(),
                 const Icon(Icons.phone, size: 14, color: Colors.grey),
                 const SizedBox(width: 4),
                 Text(
                   delivery['phone'],
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(fontFamily: 'Poppins', fontSize: 12),
                 ),
               ],
             ),
@@ -356,7 +383,9 @@ class _DeliveryStatusScreenState extends State<DeliveryStatusScreen> {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 12,
-                        color: delivery['status'] == 'Delivered' ? Colors.green : AppColors.primaryBlue,
+                        color: delivery['status'] == 'Delivered'
+                            ? Colors.green
+                            : AppColors.primaryBlue,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

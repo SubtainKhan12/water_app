@@ -12,7 +12,8 @@ class CustomerDetailsScreen extends StatefulWidget {
   State<CustomerDetailsScreen> createState() => _CustomerDetailsScreenState();
 }
 
-class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with SingleTickerProviderStateMixin {
+class _CustomerDetailsScreenState extends State<CustomerDetailsScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   // Sample order history data
@@ -97,11 +98,12 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
         actions: [
           IconButton(
             icon: const Icon(Icons.edit, color: AppColors.primaryBlue),
-            onPressed: (){
+            onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => EditCustomerScreen(customer: widget.customer),
+                  builder: (context) =>
+                      EditCustomerScreen(customer: widget.customer),
                 ),
               );
             },
@@ -138,7 +140,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
           // Customer Summary Card
           Card(
             elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -149,7 +153,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          color: AppColors.primaryBlue.withOpacity(0.1),
+                          color: AppColors.primaryBlue.withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -173,13 +177,20 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                             ),
                             const SizedBox(height: 4),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
                               decoration: BoxDecoration(
-                                color: widget.customer['status'] == 'active' ? Colors.green : Colors.grey,
+                                color: widget.customer['status'] == 'active'
+                                    ? Colors.green
+                                    : Colors.grey,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                widget.customer['status'] == 'active' ? 'Active Customer' : 'Inactive',
+                                widget.customer['status'] == 'active'
+                                    ? 'Active Customer'
+                                    : 'Inactive',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -196,8 +207,14 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _buildStatItem('Total Orders', widget.customer['totalOrders'].toString()),
-                      _buildStatItem('Total Spent', '\$${widget.customer['totalSpent']}'),
+                      _buildStatItem(
+                        'Total Orders',
+                        widget.customer['totalOrders'].toString(),
+                      ),
+                      _buildStatItem(
+                        'Total Spent',
+                        '\$${widget.customer['totalSpent']}',
+                      ),
                       _buildStatItem('Since', widget.customer['joinDate']),
                     ],
                   ),
@@ -210,7 +227,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
           // Balance Card
           Card(
             elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -249,7 +268,6 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),
@@ -259,7 +277,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
           // Contact Information
           Card(
             elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -278,7 +298,10 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                   _buildDetailItem('Email', widget.customer['email']),
                   _buildDetailItem('Address', widget.customer['address']),
                   _buildDetailItem('Member Since', widget.customer['joinDate']),
-                  _buildDetailItem('Last Order', widget.customer['lastOrderDate']),
+                  _buildDetailItem(
+                    'Last Order',
+                    widget.customer['lastOrderDate'],
+                  ),
                 ],
               ),
             ),
@@ -297,7 +320,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -314,9 +339,14 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
-                        color: order['paymentStatus'] == 'paid' ? Colors.green : Colors.orange,
+                        color: order['paymentStatus'] == 'paid'
+                            ? Colors.green
+                            : Colors.orange,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -333,10 +363,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                 const SizedBox(height: 8),
                 Text(
                   order['products'],
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -344,10 +371,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                   children: [
                     Text(
                       order['date'],
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                     Text(
                       '\$${order['amount']}',
@@ -377,7 +401,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -386,7 +412,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: isCredit ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                    color: isCredit
+                        ? Colors.green.withValues(alpha: 0.1)
+                        : Colors.orange.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -421,7 +449,9 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      isCredit ? '+\$${transaction['amount']}' : '-\$${transaction['amount'].abs()}',
+                      isCredit
+                          ? '+\$${transaction['amount']}'
+                          : '-\$${transaction['amount'].abs()}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: isCredit ? Colors.green : Colors.orange,
@@ -430,10 +460,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
                     ),
                     Text(
                       'Balance: \$${transaction['balance']}',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],
                 ),
@@ -456,13 +483,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
             color: AppColors.primaryBlue,
           ),
         ),
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 12,
-          ),
-        ),
+        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
       ],
     );
   }
@@ -484,12 +505,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> with Sing
             ),
           ),
           Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(
-                color: Colors.grey,
-              ),
-            ),
+            child: Text(value, style: const TextStyle(color: Colors.grey)),
           ),
         ],
       ),

@@ -16,8 +16,19 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
   String _selectedFilter = 'All';
   String _selectedSort = 'Stock: Low to High';
 
-  final List<String> _filters = ['All', 'Low Stock', 'Out of Stock', 'Healthy Stock'];
-  final List<String> _sortOptions = ['Name A-Z', 'Name Z-A', 'Stock: Low to High', 'Stock: High to Low', 'Category'];
+  final List<String> _filters = [
+    'All',
+    'Low Stock',
+    'Out of Stock',
+    'Healthy Stock',
+  ];
+  final List<String> _sortOptions = [
+    'Name A-Z',
+    'Name Z-A',
+    'Stock: Low to High',
+    'Stock: High to Low',
+    'Category',
+  ];
 
   // Sample products data from your catalog
   final List<Map<String, dynamic>> _products = [
@@ -115,7 +126,8 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
       filtered = filtered.where((product) {
         switch (_selectedFilter) {
           case 'Low Stock':
-            return product['stock'] > 0 && product['stock'] <= product['minStock'];
+            return product['stock'] > 0 &&
+                product['stock'] <= product['minStock'];
           case 'Out of Stock':
             return product['stock'] == 0;
           case 'Healthy Stock':
@@ -158,9 +170,12 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
   }
 
   int get _totalProducts => _products.length;
-  int get _lowStockCount => _products.where((p) => p['stock'] > 0 && p['stock'] <= p['minStock']).length;
+  int get _lowStockCount => _products
+      .where((p) => p['stock'] > 0 && p['stock'] <= p['minStock'])
+      .length;
   int get _outOfStockCount => _products.where((p) => p['stock'] == 0).length;
-  int get _healthyStockCount => _products.where((p) => p['stock'] > p['minStock']).length;
+  int get _healthyStockCount =>
+      _products.where((p) => p['stock'] > p['minStock']).length;
 
   void _performSearch(String query) {
     setState(() {
@@ -173,7 +188,9 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
       final productIndex = _products.indexWhere((p) => p['id'] == productId);
       if (productIndex != -1) {
         _products[productIndex]['stock'] = newStock;
-        _products[productIndex]['lastRestocked'] = DateTime.now().toIso8601String().split('T')[0];
+        _products[productIndex]['lastRestocked'] = DateTime.now()
+            .toIso8601String()
+            .split('T')[0];
       }
     });
   }
@@ -198,7 +215,9 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
   // }
 
   void _showUpdateStockDialog(Map<String, dynamic> product) {
-    final stockController = TextEditingController(text: product['stock'].toString());
+    final stockController = TextEditingController(
+      text: product['stock'].toString(),
+    );
     final reasonController = TextEditingController();
 
     showDialog(
@@ -209,7 +228,10 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Product: ${product['name']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              'Product: ${product['name']}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             Text('Current Stock: ${product['stock']} ${product['unit']}'),
             Text('Min Stock: ${product['minStock']} ${product['unit']}'),
@@ -240,13 +262,16 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              final newStock = int.tryParse(stockController.text) ?? product['stock'];
+              final newStock =
+                  int.tryParse(stockController.text) ?? product['stock'];
               _updateStock(product['id'], newStock);
               Navigator.pop(context);
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Stock updated to $newStock ${product['unit']}'),
+                  content: Text(
+                    'Stock updated to $newStock ${product['unit']}',
+                  ),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -287,7 +312,9 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LowStockAlertScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const LowStockAlertScreen(),
+                ),
               );
             },
             tooltip: 'Low Stock Alerts',
@@ -303,9 +330,7 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
           _buildStockOverview(),
 
           // Products List
-          Expanded(
-            child: _buildProductsList(),
-          ),
+          Expanded(child: _buildProductsList()),
         ],
       ),
     );
@@ -328,7 +353,10 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey.shade300),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
             ),
           ),
           const SizedBox(height: 12),
@@ -417,26 +445,51 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
       color: Colors.white,
       child: Row(
         children: [
-          _buildStockStatItem('Total', _totalProducts.toString(), Icons.inventory, AppColors.primaryBlue),
+          _buildStockStatItem(
+            'Total',
+            _totalProducts.toString(),
+            Icons.inventory,
+            AppColors.primaryBlue,
+          ),
           const SizedBox(width: 12),
-          _buildStockStatItem('Healthy', _healthyStockCount.toString(), Icons.check_circle, Colors.green),
+          _buildStockStatItem(
+            'Healthy',
+            _healthyStockCount.toString(),
+            Icons.check_circle,
+            Colors.green,
+          ),
           const SizedBox(width: 12),
-          _buildStockStatItem('Low Stock', _lowStockCount.toString(), Icons.warning, Colors.orange),
+          _buildStockStatItem(
+            'Low Stock',
+            _lowStockCount.toString(),
+            Icons.warning,
+            Colors.orange,
+          ),
           const SizedBox(width: 12),
-          _buildStockStatItem('Out of Stock', _outOfStockCount.toString(), Icons.error, Colors.red),
+          _buildStockStatItem(
+            'Out of Stock',
+            _outOfStockCount.toString(),
+            Icons.error,
+            Colors.red,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildStockStatItem(String label, String value, IconData icon, Color color) {
+  Widget _buildStockStatItem(
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(
           children: [
@@ -452,10 +505,7 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
             ),
             Text(
               label,
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 10,
-              ),
+              style: const TextStyle(color: Colors.grey, fontSize: 10),
             ),
           ],
         ),
@@ -470,7 +520,9 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              _searchQuery.isNotEmpty ? Icons.search_off : Icons.inventory_2_outlined,
+              _searchQuery.isNotEmpty
+                  ? Icons.search_off
+                  : Icons.inventory_2_outlined,
               size: 80,
               color: Colors.grey.shade300,
             ),
@@ -479,10 +531,7 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
               _searchQuery.isNotEmpty
                   ? 'No products found for "$_searchQuery"'
                   : 'No products match the current filter',
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-              ),
+              style: const TextStyle(color: Colors.grey, fontSize: 16),
             ),
           ],
         ),
@@ -501,8 +550,11 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
 
   Widget _buildStockItem(Map<String, dynamic> product) {
     final isOutOfStock = product['stock'] == 0;
-    final isLowStock = product['stock'] > 0 && product['stock'] <= product['minStock'];
-    final stockPercentage = product['minStock'] > 0 ? (product['stock'] / product['minStock']) : 0;
+    final isLowStock =
+        product['stock'] > 0 && product['stock'] <= product['minStock'];
+    final stockPercentage = product['minStock'] > 0
+        ? (product['stock'] / product['minStock'])
+        : 0;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -517,7 +569,7 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: AppColors.primaryBlue.withOpacity(0.1),
+                color: AppColors.primaryBlue.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -622,10 +674,30 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
   Widget _buildStockHistorySheet(Map<String, dynamic> product) {
     // Mock stock history data
     final stockHistory = [
-      {'date': '2024-01-18', 'change': 50, 'type': 'restock', 'reason': 'New shipment'},
-      {'date': '2024-01-15', 'change': -5, 'type': 'sale', 'reason': 'Customer order'},
-      {'date': '2024-01-12', 'change': -3, 'type': 'sale', 'reason': 'Customer order'},
-      {'date': '2024-01-10', 'change': 100, 'type': 'restock', 'reason': 'Initial stock'},
+      {
+        'date': '2024-01-18',
+        'change': 50,
+        'type': 'restock',
+        'reason': 'New shipment',
+      },
+      {
+        'date': '2024-01-15',
+        'change': -5,
+        'type': 'sale',
+        'reason': 'Customer order',
+      },
+      {
+        'date': '2024-01-12',
+        'change': -3,
+        'type': 'sale',
+        'reason': 'Customer order',
+      },
+      {
+        'date': '2024-01-10',
+        'change': 100,
+        'type': 'restock',
+        'reason': 'Initial stock',
+      },
     ];
 
     return Container(
@@ -672,7 +744,9 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: isRestock ? Colors.green.shade50 : Colors.blue.shade50,
+                      color: isRestock
+                          ? Colors.green.shade50
+                          : Colors.blue.shade50,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -699,7 +773,10 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                       ),
                       Text(
                         history['date'].toString(),
-                        style: const TextStyle(fontSize: 12, color: Colors.grey),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),

@@ -28,8 +28,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
   late bool _isFeatured;
   late bool _isActive;
 
-  final List<String> _categories = ['Beverages', 'Containers', 'Equipment', 'Filters', 'Accessories'];
-  final List<String> _units = ['bottle', 'jug', 'unit', 'system', 'cartridge', 'piece'];
+  final List<String> _categories = [
+    'Beverages',
+    'Containers',
+    'Equipment',
+    'Filters',
+    'Accessories',
+  ];
+  final List<String> _units = [
+    'bottle',
+    'jug',
+    'unit',
+    'system',
+    'cartridge',
+    'piece',
+  ];
 
   @override
   void initState() {
@@ -39,14 +52,26 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   void _initializeControllers() {
     _nameController = TextEditingController(text: widget.product['name']);
-    _descriptionController = TextEditingController(text: widget.product['description']);
-    _priceController = TextEditingController(text: widget.product['price'].toString());
-    _costPriceController = TextEditingController(text: widget.product['costPrice'].toString());
-    _stockController = TextEditingController(text: widget.product['stock'].toString());
-    _minStockController = TextEditingController(text: widget.product['minStock'].toString());
+    _descriptionController = TextEditingController(
+      text: widget.product['description'],
+    );
+    _priceController = TextEditingController(
+      text: widget.product['price'].toString(),
+    );
+    _costPriceController = TextEditingController(
+      text: widget.product['costPrice'].toString(),
+    );
+    _stockController = TextEditingController(
+      text: widget.product['stock'].toString(),
+    );
+    _minStockController = TextEditingController(
+      text: widget.product['minStock'].toString(),
+    );
     _unitController = TextEditingController(text: widget.product['unit']);
     _barcodeController = TextEditingController(text: widget.product['barcode']);
-    _supplierController = TextEditingController(text: widget.product['supplier']);
+    _supplierController = TextEditingController(
+      text: widget.product['supplier'],
+    );
 
     _selectedCategory = widget.product['category'];
     _selectedUnits = widget.product['unit'];
@@ -107,7 +132,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Delete Product'),
-        content: Text('Are you sure you want to delete "${widget.product['name']}"? This action cannot be undone.'),
+        content: Text(
+          'Are you sure you want to delete "${widget.product['name']}"? This action cannot be undone.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -422,9 +449,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
       margin: const EdgeInsets.only(bottom: 24),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.primaryBlue.withOpacity(0.05),
+        color: AppColors.primaryBlue.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
+        border: Border.all(color: AppColors.primaryBlue.withValues(alpha: 0.1)),
       ),
       child: Row(
         children: [
@@ -432,7 +459,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: AppColors.primaryBlue.withOpacity(0.1),
+              color: AppColors.primaryBlue.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
@@ -457,17 +484,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 const SizedBox(height: 4),
                 Text(
                   'ID: ${widget.product['id']}',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
                 Text(
                   'Created: ${widget.product['createdAt']}',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
               ],
             ),
@@ -539,12 +560,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
             maxLines: maxLines,
             decoration: InputDecoration(
               hintText: hintText,
-              prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 20) : null,
+              prefixIcon: prefixIcon != null
+                  ? Icon(prefixIcon, size: 20)
+                  : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey.shade300),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
             ),
             validator: validator,
           ),
@@ -627,10 +653,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 ),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
               ],
             ),

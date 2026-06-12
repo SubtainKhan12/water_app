@@ -26,7 +26,8 @@ class AutoCapitalizeTextField extends StatefulWidget {
   });
 
   @override
-  State<AutoCapitalizeTextField> createState() => _AutoCapitalizeTextFieldState();
+  State<AutoCapitalizeTextField> createState() =>
+      _AutoCapitalizeTextFieldState();
 }
 
 class _AutoCapitalizeTextFieldState extends State<AutoCapitalizeTextField> {
@@ -61,52 +62,37 @@ class _AutoCapitalizeTextFieldState extends State<AutoCapitalizeTextField> {
         ),
         helperText: widget.helperText,
         helperStyle: TextStyle(
-          color: AppColors.skyBlue.withOpacity(0.7),
+          color: AppColors.skyBlue.withValues(alpha: 0.7),
           fontSize: 12,
           fontFamily: 'Poppins',
         ),
-        prefixIcon: Icon(
-          widget.prefixIcon,
-          color: AppColors.primaryBlue,
-        ),
+        prefixIcon: Icon(widget.prefixIcon, color: AppColors.primaryBlue),
         suffixIcon: widget.isPassword
             ? IconButton(
-          onPressed: widget.onToggleObscure,
-          icon: Icon(
-            widget.obscureText ? Icons.visibility_off : Icons.visibility,
-            color: AppColors.primaryBlue,
-          ),
-        )
+                onPressed: widget.onToggleObscure,
+                icon: Icon(
+                  widget.obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: AppColors.primaryBlue,
+                ),
+              )
             : null,
         filled: true,
         fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: AppColors.lightSkyBlue,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: AppColors.lightSkyBlue, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.primaryBlue,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: AppColors.primaryBlue, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.errorRed,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: AppColors.errorRed, width: 2),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.errorRed,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: AppColors.errorRed, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20,

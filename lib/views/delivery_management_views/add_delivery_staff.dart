@@ -172,7 +172,7 @@ class _AddDeliveryStaffScreenState extends State<AddDeliveryStaffScreen> {
             border: Border.all(color: Colors.grey.shade300),
           ),
           child: DropdownButtonFormField<String>(
-            value: _selectedVehicleType,
+            initialValue: _selectedVehicleType,
             items: _vehicleTypes.map((String type) {
               return DropdownMenuItem<String>(
                 value: type,

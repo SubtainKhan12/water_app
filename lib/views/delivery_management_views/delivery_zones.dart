@@ -94,17 +94,19 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
       appBar: AppBar(
         title: const Text(
           'Delivery Zones',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> AddDeliveryZoneScreen()));
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddDeliveryZoneScreen(),
+                ),
+              );
             },
             icon: const Icon(Icons.add),
           ),
@@ -124,9 +126,17 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
   }
 
   Widget _buildSummaryCards() {
-    final activeZones = _zones.where((zone) => zone['status'] == 'Active').length;
-    final totalStaff = _zones.fold<int>(0, (sum, zone) => sum + (zone['activeStaff'] as int));
-    final totalOrders = _zones.fold<int>(0, (sum, zone) => sum + (zone['totalOrders'] as int));
+    final activeZones = _zones
+        .where((zone) => zone['status'] == 'Active')
+        .length;
+    final totalStaff = _zones.fold<int>(
+      0,
+      (sum, zone) => sum + (zone['activeStaff'] as int),
+    );
+    final totalOrders = _zones.fold<int>(
+      0,
+      (sum, zone) => sum + (zone['totalOrders'] as int),
+    );
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -134,22 +144,42 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
       child: Row(
         children: [
           Expanded(
-            child: _buildSummaryCard('Active Zones', activeZones.toString(), Icons.location_on, AppColors.primaryBlue),
+            child: _buildSummaryCard(
+              'Active Zones',
+              activeZones.toString(),
+              Icons.location_on,
+              AppColors.primaryBlue,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: _buildSummaryCard('Total Staff', totalStaff.toString(), Icons.people, Colors.green),
+            child: _buildSummaryCard(
+              'Total Staff',
+              totalStaff.toString(),
+              Icons.people,
+              Colors.green,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: _buildSummaryCard('Today\'s Orders', totalOrders.toString(), Icons.local_shipping, Colors.orange),
+            child: _buildSummaryCard(
+              'Today\'s Orders',
+              totalOrders.toString(),
+              Icons.local_shipping,
+              Colors.orange,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSummaryCard(String title, String value, IconData icon, Color color) {
+  Widget _buildSummaryCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -157,10 +187,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 4),
         ],
       ),
       child: Column(
@@ -219,7 +246,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: zone['color'].withOpacity(0.2),
+                    color: zone['color'].withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -253,11 +280,18 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: isActive ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                    color: isActive
+                        ? Colors.green.withValues(alpha: 0.1)
+                        : Colors.red.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: isActive ? Colors.green : Colors.red),
+                    border: Border.all(
+                      color: isActive ? Colors.green : Colors.red,
+                    ),
                   ),
                   child: Text(
                     zone['status'],
@@ -278,8 +312,16 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildDeliveryDetail('Delivery Time', zone['deliveryTime'], Icons.access_time),
-                _buildDeliveryDetail('Delivery Charge', zone['deliveryCharge'], Icons.attach_money),
+                _buildDeliveryDetail(
+                  'Delivery Time',
+                  zone['deliveryTime'],
+                  Icons.access_time,
+                ),
+                _buildDeliveryDetail(
+                  'Delivery Charge',
+                  zone['deliveryCharge'],
+                  Icons.attach_money,
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -304,10 +346,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          fontFamily: 'Poppins',
-          fontSize: 10,
-        ),
+        style: const TextStyle(fontFamily: 'Poppins', fontSize: 10),
       ),
     );
   }
@@ -362,12 +401,9 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
             return Chip(
               label: Text(
                 area,
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 10,
-                ),
+                style: const TextStyle(fontFamily: 'Poppins', fontSize: 10),
               ),
-              backgroundColor: AppColors.skyBlue.withOpacity(0.2),
+              backgroundColor: AppColors.skyBlue.withValues(alpha: 0.2),
               labelPadding: const EdgeInsets.symmetric(horizontal: 8),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             );
@@ -391,7 +427,9 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
               ).then((updatedZone) {
                 if (updatedZone != null) {
                   setState(() {
-                    final index = _zones.indexWhere((z) => z['id'] == zone['id']);
+                    final index = _zones.indexWhere(
+                      (z) => z['id'] == zone['id'],
+                    );
                     if (index != -1) {
                       _zones[index] = updatedZone;
                     }
@@ -400,10 +438,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
               });
             },
             icon: const Icon(Icons.edit, size: 16),
-            label: const Text(
-              'Edit',
-              style: TextStyle(fontFamily: 'Poppins'),
-            ),
+            label: const Text('Edit', style: TextStyle(fontFamily: 'Poppins')),
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.primaryBlue,
               side: const BorderSide(color: AppColors.primaryBlue),
@@ -423,9 +458,13 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
               style: const TextStyle(fontFamily: 'Poppins'),
             ),
             style: OutlinedButton.styleFrom(
-              foregroundColor: zone['status'] == 'Active' ? Colors.orange : Colors.green,
+              foregroundColor: zone['status'] == 'Active'
+                  ? Colors.orange
+                  : Colors.green,
               side: BorderSide(
-                color: zone['status'] == 'Active' ? Colors.orange : Colors.green,
+                color: zone['status'] == 'Active'
+                    ? Colors.orange
+                    : Colors.green,
               ),
             ),
           ),
@@ -435,10 +474,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
           child: OutlinedButton.icon(
             onPressed: () => _viewZoneDetails(zone),
             icon: const Icon(Icons.visibility, size: 16),
-            label: const Text(
-              'View',
-              style: TextStyle(fontFamily: 'Poppins'),
-            ),
+            label: const Text('View', style: TextStyle(fontFamily: 'Poppins')),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.purple,
               side: const BorderSide(color: Colors.purple),
@@ -449,7 +485,6 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
     );
   }
 
-
   void _toggleZoneStatus(Map<String, dynamic> zone) {
     setState(() {
       zone['status'] = zone['status'] == 'Active' ? 'Inactive' : 'Active';
@@ -457,8 +492,12 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Zone ${zone['name']} ${zone['status'] == 'Active' ? 'activated' : 'paused'}'),
-        backgroundColor: zone['status'] == 'Active' ? Colors.green : Colors.orange,
+        content: Text(
+          'Zone ${zone['name']} ${zone['status'] == 'Active' ? 'activated' : 'paused'}',
+        ),
+        backgroundColor: zone['status'] == 'Active'
+            ? Colors.green
+            : Colors.orange,
       ),
     );
   }
@@ -481,7 +520,10 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
               _buildDetailRow('Delivery Time', zone['deliveryTime']),
               _buildDetailRow('Delivery Charge', zone['deliveryCharge']),
               _buildDetailRow('Active Staff', zone['activeStaff'].toString()),
-              _buildDetailRow('Total Orders Today', zone['totalOrders'].toString()),
+              _buildDetailRow(
+                'Total Orders Today',
+                zone['totalOrders'].toString(),
+              ),
               _buildDetailRow('Status', zone['status']),
               const SizedBox(height: 16),
               const Text(
@@ -492,10 +534,14 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              ...zone['areas'].map((area) => Text(
-                '• $area',
-                style: const TextStyle(fontFamily: 'Poppins'),
-              )).toList(),
+              ...zone['areas']
+                  .map(
+                    (area) => Text(
+                      '• $area',
+                      style: const TextStyle(fontFamily: 'Poppins'),
+                    ),
+                  )
+                  .toList(),
             ],
           ),
         ),
@@ -522,10 +568,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          Text(
-            value,
-            style: const TextStyle(fontFamily: 'Poppins'),
-          ),
+          Text(value, style: const TextStyle(fontFamily: 'Poppins')),
         ],
       ),
     );

@@ -17,8 +17,21 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
   String _selectedCategory = 'All';
   String _selectedSort = 'Name A-Z';
 
-  final List<String> _categories = ['All', 'Beverages', 'Containers', 'Equipment', 'Filters', 'Accessories'];
-  final List<String> _sortOptions = ['Name A-Z', 'Name Z-A', 'Price: Low to High', 'Price: High to Low', 'Stock: Low to High'];
+  final List<String> _categories = [
+    'All',
+    'Beverages',
+    'Containers',
+    'Equipment',
+    'Filters',
+    'Accessories',
+  ];
+  final List<String> _sortOptions = [
+    'Name A-Z',
+    'Name Z-A',
+    'Price: Low to High',
+    'Price: High to Low',
+    'Stock: Low to High',
+  ];
 
   // Sample products data
   final List<Map<String, dynamic>> _products = [
@@ -203,7 +216,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
   }
 
   int get _lowStockCount {
-    return _products.where((product) => product['stock'] <= product['minStock']).length;
+    return _products
+        .where((product) => product['stock'] <= product['minStock'])
+        .length;
   }
 
   int get _outOfStockCount {
@@ -219,9 +234,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
   void _openAddProduct() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const AddProductScreen(),
-      ),
+      MaterialPageRoute(builder: (context) => const AddProductScreen()),
     ).then((value) {
       if (value != null && value == true) {
         setState(() {}); // Refresh product list
@@ -265,7 +278,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
       final productIndex = _products.indexWhere((p) => p['id'] == productId);
       if (productIndex != -1) {
         _products[productIndex]['status'] =
-        _products[productIndex]['status'] == 'active' ? 'inactive' : 'active';
+            _products[productIndex]['status'] == 'active'
+            ? 'inactive'
+            : 'active';
       }
     });
   }
@@ -307,9 +322,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
           _buildQuickStats(),
 
           // Products Grid/List
-          Expanded(
-            child: _buildProductsView(),
-          ),
+          Expanded(child: _buildProductsView()),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -337,7 +350,10 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey.shade300),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
             ),
           ),
           const SizedBox(height: 12),
@@ -426,24 +442,43 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
       color: Colors.white,
       child: Row(
         children: [
-          _buildStatItem('Total Products', _products.length.toString(), Icons.inventory),
+          _buildStatItem(
+            'Total Products',
+            _products.length.toString(),
+            Icons.inventory,
+          ),
           const SizedBox(width: 16),
-          _buildStatItem('Low Stock', _lowStockCount.toString(), Icons.warning, color: Colors.orange),
+          _buildStatItem(
+            'Low Stock',
+            _lowStockCount.toString(),
+            Icons.warning,
+            color: Colors.orange,
+          ),
           const SizedBox(width: 16),
-          _buildStatItem('Out of Stock', _outOfStockCount.toString(), Icons.error, color: Colors.red),
+          _buildStatItem(
+            'Out of Stock',
+            _outOfStockCount.toString(),
+            Icons.error,
+            color: Colors.red,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildStatItem(String label, String value, IconData icon, {Color color = AppColors.primaryBlue}) {
+  Widget _buildStatItem(
+    String label,
+    String value,
+    IconData icon, {
+    Color color = AppColors.primaryBlue,
+  }) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Row(
           children: [
@@ -463,10 +498,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                   ),
                   Text(
                     label,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
               ),
@@ -484,7 +516,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              _searchQuery.isNotEmpty ? Icons.search_off : Icons.inventory_2_outlined,
+              _searchQuery.isNotEmpty
+                  ? Icons.search_off
+                  : Icons.inventory_2_outlined,
               size: 80,
               color: Colors.grey.shade300,
             ),
@@ -493,19 +527,14 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
               _searchQuery.isNotEmpty
                   ? 'No products found for "$_searchQuery"'
                   : 'No products available',
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-              ),
+              style: const TextStyle(color: Colors.grey, fontSize: 16),
             ),
             if (_searchQuery.isEmpty)
               TextButton(
                 onPressed: _openAddProduct,
                 child: const Text(
                   'Add First Product',
-                  style: TextStyle(
-                    color: AppColors.primaryBlue,
-                  ),
+                  style: TextStyle(color: AppColors.primaryBlue),
                 ),
               ),
           ],
@@ -531,7 +560,8 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
 
   Widget _buildProductCard(Map<String, dynamic> product) {
     final isOutOfStock = product['stock'] == 0;
-    final isLowStock = product['stock'] <= product['minStock'] && product['stock'] > 0;
+    final isLowStock =
+        product['stock'] <= product['minStock'] && product['stock'] > 0;
     final isInactive = product['status'] == 'inactive';
 
     return Card(
@@ -555,7 +585,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
-                      color: AppColors.primaryBlue.withOpacity(0.1),
+                      color: AppColors.primaryBlue.withValues(alpha: 0.1),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                         topRight: Radius.circular(12),
@@ -584,7 +614,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                                 product['name'],
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: isInactive ? Colors.grey : AppColors.DarkBlue,
+                                  color: isInactive
+                                      ? Colors.grey
+                                      : AppColors.DarkBlue,
                                   fontSize: 14,
                                 ),
                                 maxLines: 2,
@@ -592,7 +624,11 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                               ),
                             ),
                             if (product['isFeatured'])
-                              const Icon(Icons.star, color: Colors.amber, size: 16),
+                              const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 16,
+                              ),
                           ],
                         ),
                         const SizedBox(height: 4),
@@ -615,7 +651,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                               '\$${product['price']}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: isInactive ? Colors.grey : AppColors.primaryBlue,
+                                color: isInactive
+                                    ? Colors.grey
+                                    : AppColors.primaryBlue,
                                 fontSize: 16,
                               ),
                             ),
@@ -649,8 +687,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                       _buildStatusBadge('Out of Stock', Colors.red),
                     if (isLowStock && !isOutOfStock)
                       _buildStatusBadge('Low Stock', Colors.orange),
-                    if (isInactive)
-                      _buildStatusBadge('Inactive', Colors.grey),
+                    if (isInactive) _buildStatusBadge('Inactive', Colors.grey),
                   ],
                 ),
               ),
@@ -660,7 +697,11 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                 top: 5,
                 right: 0,
                 child: PopupMenuButton<String>(
-                  icon: const Icon(Icons.more_vert, size: 18, color: Colors.grey),
+                  icon: const Icon(
+                    Icons.more_vert,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
                   onSelected: (value) {
                     if (value == 'edit') {
                       _openEditProduct(product);
@@ -686,11 +727,17 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                       child: Row(
                         children: [
                           Icon(
-                            product['status'] == 'active' ? Icons.pause : Icons.play_arrow,
+                            product['status'] == 'active'
+                                ? Icons.pause
+                                : Icons.play_arrow,
                             size: 16,
                           ),
                           const SizedBox(width: 8),
-                          Text(product['status'] == 'active' ? 'Deactivate' : 'Activate'),
+                          Text(
+                            product['status'] == 'active'
+                                ? 'Deactivate'
+                                : 'Activate',
+                          ),
                         ],
                       ),
                     ),
@@ -718,7 +765,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.9),
+        color: color.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
@@ -750,7 +797,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
   }
 
   void _showUpdateStockDialog(Map<String, dynamic> product) {
-    final stockController = TextEditingController(text: product['stock'].toString());
+    final stockController = TextEditingController(
+      text: product['stock'].toString(),
+    );
 
     showDialog(
       context: context,
@@ -781,12 +830,15 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              final newStock = int.tryParse(stockController.text) ?? product['stock'];
+              final newStock =
+                  int.tryParse(stockController.text) ?? product['stock'];
               _updateStock(product['id'], newStock);
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Stock updated to $newStock ${product['unit']}'),
+                  content: Text(
+                    'Stock updated to $newStock ${product['unit']}',
+                  ),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -800,7 +852,8 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
 
   Widget _buildProductDetailsSheet(Map<String, dynamic> product) {
     final isOutOfStock = product['stock'] == 0;
-    final isLowStock = product['stock'] <= product['minStock'] && product['stock'] > 0;
+    final isLowStock =
+        product['stock'] <= product['minStock'] && product['stock'] > 0;
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.85,
@@ -834,7 +887,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryBlue.withOpacity(0.1),
+                  color: AppColors.primaryBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -910,7 +963,10 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                   _buildDetailItem('Barcode', product['barcode']),
                   _buildDetailItem('Supplier', product['supplier']),
                   _buildDetailItem('Unit', product['unit']),
-                  _buildDetailItem('Status', product['status'] == 'active' ? 'Active' : 'Inactive'),
+                  _buildDetailItem(
+                    'Status',
+                    product['status'] == 'active' ? 'Active' : 'Inactive',
+                  ),
                   _buildDetailItem('Created', product['createdAt']),
 
                   // Stock Alert
@@ -919,7 +975,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isOutOfStock ? Colors.red.shade50 : Colors.orange.shade50,
+                        color: isOutOfStock
+                            ? Colors.red.shade50
+                            : Colors.orange.shade50,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isOutOfStock ? Colors.red : Colors.orange,
@@ -938,7 +996,9 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
                                   ? 'This product is out of stock. Consider restocking soon.'
                                   : 'This product is running low on stock. Minimum stock level is ${product['minStock']}.',
                               style: TextStyle(
-                                color: isOutOfStock ? Colors.red : Colors.orange,
+                                color: isOutOfStock
+                                    ? Colors.red
+                                    : Colors.orange,
                               ),
                             ),
                           ),
@@ -1004,13 +1064,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
             color: AppColors.primaryBlue,
           ),
         ),
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 12,
-          ),
-        ),
+        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
       ],
     );
   }
@@ -1032,12 +1086,7 @@ class _ProductCatalogScreenState extends State<ProductCatalogScreen> {
             ),
           ),
           Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(
-                color: Colors.grey,
-              ),
-            ),
+            child: Text(value, style: const TextStyle(color: Colors.grey)),
           ),
         ],
       ),

@@ -18,10 +18,7 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
       appBar: AppBar(
         title: const Text(
           'Expense Tracking',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
@@ -47,7 +44,9 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const RecordExpenseScreen()),
+            MaterialPageRoute(
+              builder: (context) => const RecordExpenseScreen(),
+            ),
           );
         },
         backgroundColor: AppColors.primaryBlue,
@@ -80,7 +79,12 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
     );
   }
 
-  Widget _buildSummaryCard(String title, String amount, IconData icon, Color color) {
+  Widget _buildSummaryCard(
+    String title,
+    String amount,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -88,7 +92,7 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -164,10 +168,13 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColors.skyBlue.withOpacity(0.2),
+              color: AppColors.skyBlue.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(Icons.local_gas_station, color: AppColors.primaryBlue),
+            child: const Icon(
+              Icons.local_gas_station,
+              color: AppColors.primaryBlue,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -255,10 +262,7 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4),
         ],
       ),
       child: Column(
@@ -268,7 +272,7 @@ class _ExpenseDashboardScreenState extends State<ExpenseDashboardScreen> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColors.primaryBlue.withOpacity(0.1),
+              color: AppColors.primaryBlue.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.category, color: AppColors.primaryBlue),

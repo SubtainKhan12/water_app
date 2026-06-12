@@ -74,7 +74,7 @@ class _SalaryHistoryScreenState extends State<SalaryHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     final currentMonthData = _salaryHistory.firstWhere(
-          (element) => element['month'] == _selectedMonth,
+      (element) => element['month'] == _selectedMonth,
       orElse: () => _salaryHistory.first,
     );
 
@@ -82,10 +82,7 @@ class _SalaryHistoryScreenState extends State<SalaryHistoryScreen> {
       appBar: AppBar(
         title: const Text(
           'Salary History',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
@@ -139,16 +136,19 @@ class _SalaryHistoryScreenState extends State<SalaryHistoryScreen> {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.primaryBlue.withOpacity(0.1),
+        color: AppColors.primaryBlue.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
+        border: Border.all(color: AppColors.primaryBlue.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildSummaryItem('Total Paid', '${monthData['totalPaid']}'),
           _buildSummaryItem('Staff', monthData['staffCount'].toString()),
-          _buildSummaryItem('Payments', monthData['payments'].length.toString()),
+          _buildSummaryItem(
+            'Payments',
+            monthData['payments'].length.toString(),
+          ),
         ],
       ),
     );
@@ -168,10 +168,7 @@ class _SalaryHistoryScreenState extends State<SalaryHistoryScreen> {
         ),
         Text(
           label,
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            color: Colors.grey.shade600,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', color: Colors.grey.shade600),
         ),
       ],
     );
@@ -199,7 +196,7 @@ class _SalaryHistoryScreenState extends State<SalaryHistoryScreen> {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.1),
+            color: Colors.green.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: const Icon(Icons.check_circle, color: Colors.green),
@@ -247,7 +244,7 @@ class _SalaryHistoryScreenState extends State<SalaryHistoryScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.1),
+                color: Colors.green.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(

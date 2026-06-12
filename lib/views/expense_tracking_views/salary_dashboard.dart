@@ -6,7 +6,6 @@ import 'package:water_app/views/expense_tracking_views/salary_history.dart';
 
 import 'add_salary.dart';
 
-
 class SalaryDashboardScreen extends StatefulWidget {
   const SalaryDashboardScreen({super.key});
 
@@ -64,10 +63,7 @@ class _SalaryDashboardScreenState extends State<SalaryDashboardScreen> {
       appBar: AppBar(
         title: const Text(
           'Salary Management',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
@@ -76,7 +72,9 @@ class _SalaryDashboardScreenState extends State<SalaryDashboardScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SalaryHistoryScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const SalaryHistoryScreen(),
+                ),
               );
             },
             icon: const Icon(Icons.history),
@@ -160,7 +158,12 @@ class _SalaryDashboardScreenState extends State<SalaryDashboardScreen> {
     );
   }
 
-  Widget _buildSummaryCard(String title, String value, IconData icon, Color color) {
+  Widget _buildSummaryCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -168,10 +171,7 @@ class _SalaryDashboardScreenState extends State<SalaryDashboardScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 4),
         ],
       ),
       child: Column(
@@ -224,14 +224,10 @@ class _SalaryDashboardScreenState extends State<SalaryDashboardScreen> {
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: AppColors.skyBlue.withOpacity(0.2),
+            color: AppColors.skyBlue.withValues(alpha: 0.2),
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            Icons.person,
-            color: AppColors.primaryBlue,
-            size: 24,
-          ),
+          child: Icon(Icons.person, color: AppColors.primaryBlue, size: 24),
         ),
         title: Text(
           staff['name'],
@@ -264,11 +260,11 @@ class _SalaryDashboardScreenState extends State<SalaryDashboardScreen> {
         trailing: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isPaid ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+            color: isPaid
+                ? Colors.green.withValues(alpha: 0.1)
+                : Colors.orange.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isPaid ? Colors.green : Colors.orange,
-            ),
+            border: Border.all(color: isPaid ? Colors.green : Colors.orange),
           ),
           child: Text(
             isPaid ? 'Paid' : 'Pending',

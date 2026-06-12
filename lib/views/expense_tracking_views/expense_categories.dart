@@ -6,7 +6,8 @@ class ExpenseCategoriesScreen extends StatefulWidget {
   const ExpenseCategoriesScreen({super.key});
 
   @override
-  State<ExpenseCategoriesScreen> createState() => _ExpenseCategoriesScreenState();
+  State<ExpenseCategoriesScreen> createState() =>
+      _ExpenseCategoriesScreenState();
 }
 
 class _ExpenseCategoriesScreenState extends State<ExpenseCategoriesScreen> {
@@ -61,10 +62,7 @@ class _ExpenseCategoriesScreenState extends State<ExpenseCategoriesScreen> {
       appBar: AppBar(
         title: const Text(
           'Expense Categories',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
@@ -99,10 +97,7 @@ class _ExpenseCategoriesScreenState extends State<ExpenseCategoriesScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4),
         ],
       ),
       child: Row(
@@ -111,7 +106,7 @@ class _ExpenseCategoriesScreenState extends State<ExpenseCategoriesScreen> {
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-              color: (category['color'] as Color).withOpacity(0.2),
+              color: (category['color'] as Color).withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
             child: Icon(category['icon'] as IconData, color: category['color']),

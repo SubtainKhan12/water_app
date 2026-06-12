@@ -14,7 +14,8 @@ class _AddDeliveryZoneScreenState extends State<AddDeliveryZoneScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _areaController = TextEditingController();
   final TextEditingController _deliveryTimeController = TextEditingController();
-  final TextEditingController _deliveryChargeController = TextEditingController();
+  final TextEditingController _deliveryChargeController =
+      TextEditingController();
   final TextEditingController _activeStaffController = TextEditingController();
   final TextEditingController _totalOrdersController = TextEditingController();
   final TextEditingController _areaInputController = TextEditingController();
@@ -42,18 +43,12 @@ class _AddDeliveryZoneScreenState extends State<AddDeliveryZoneScreen> {
       appBar: AppBar(
         title: const Text(
           'Add Delivery Zone',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryBlue,
         foregroundColor: Colors.white,
         actions: [
-          IconButton(
-            onPressed: _saveZone,
-            icon: const Icon(Icons.save),
-          ),
+          IconButton(onPressed: _saveZone, icon: const Icon(Icons.save)),
         ],
       ),
       body: Padding(
@@ -234,7 +229,7 @@ class _AddDeliveryZoneScreenState extends State<AddDeliveryZoneScreen> {
             border: Border.all(color: Colors.grey.shade300),
           ),
           child: DropdownButtonFormField<String>(
-            value: _selectedStatus,
+            initialValue: _selectedStatus,
             items: ['Active', 'Inactive'].map((String status) {
               return DropdownMenuItem<String>(
                 value: status,
@@ -335,7 +330,7 @@ class _AddDeliveryZoneScreenState extends State<AddDeliveryZoneScreen> {
               onPressed: _addArea,
               icon: const Icon(Icons.add, color: AppColors.primaryBlue),
               style: IconButton.styleFrom(
-                backgroundColor: AppColors.primaryBlue.withOpacity(0.1),
+                backgroundColor: AppColors.primaryBlue.withValues(alpha: 0.1),
               ),
             ),
           ],
@@ -352,11 +347,8 @@ class _AddDeliveryZoneScreenState extends State<AddDeliveryZoneScreen> {
       runSpacing: 4,
       children: _areas.map((area) {
         return Chip(
-          label: Text(
-            area,
-            style: const TextStyle(fontFamily: 'Poppins'),
-          ),
-          backgroundColor: AppColors.skyBlue.withOpacity(0.2),
+          label: Text(area, style: const TextStyle(fontFamily: 'Poppins')),
+          backgroundColor: AppColors.skyBlue.withValues(alpha: 0.2),
           deleteIcon: const Icon(Icons.close, size: 16),
           onDeleted: () => _removeArea(area),
         );
@@ -370,9 +362,7 @@ class _AddDeliveryZoneScreenState extends State<AddDeliveryZoneScreen> {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryBlue,
         padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
       child: const Text(
         'Save Delivery Zone',

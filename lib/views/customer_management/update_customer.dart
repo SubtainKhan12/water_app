@@ -22,7 +22,12 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
 
   String _customerType = 'Regular';
   String _customerStatus = 'active';
-  final List<String> _customerTypes = ['Regular', 'Premium', 'Corporate', 'VIP'];
+  final List<String> _customerTypes = [
+    'Regular',
+    'Premium',
+    'Corporate',
+    'VIP',
+  ];
   final List<String> _statusOptions = ['active', 'inactive'];
 
   @override
@@ -41,7 +46,6 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
     _customerType = widget.customer['type'] ?? 'Regular';
     _customerStatus = widget.customer['status'] ?? 'active';
   }
-
 
   void _resetForm() {
     _initializeForm();
@@ -146,11 +150,23 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _buildStatItem('Total Orders', widget.customer['totalOrders'].toString()),
-            _buildStatItem('Total Amount Spent', '\$${widget.customer['totalSpent']}'),
-            _buildStatItem('Current Balance', '\$${widget.customer['currentBalance']}'),
+            _buildStatItem(
+              'Total Orders',
+              widget.customer['totalOrders'].toString(),
+            ),
+            _buildStatItem(
+              'Total Amount Spent',
+              '\$${widget.customer['totalSpent']}',
+            ),
+            _buildStatItem(
+              'Current Balance',
+              '\$${widget.customer['currentBalance']}',
+            ),
             _buildStatItem('Member Since', widget.customer['joinDate']),
-            _buildStatItem('Last Order', widget.customer['lastOrderDate'] ?? 'No orders yet'),
+            _buildStatItem(
+              'Last Order',
+              widget.customer['lastOrderDate'] ?? 'No orders yet',
+            ),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -237,7 +253,9 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
               // Customer Avatar and Quick Info
               Card(
                 elevation: 2,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Row(
@@ -246,7 +264,7 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                          color: AppColors.primaryBlue.withOpacity(0.1),
+                          color: AppColors.primaryBlue.withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -280,13 +298,20 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: widget.customer['status'] == 'active' ? Colors.green : Colors.grey,
+                                    color: widget.customer['status'] == 'active'
+                                        ? Colors.green
+                                        : Colors.grey,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
-                                    widget.customer['status'] == 'active' ? 'Active' : 'Inactive',
+                                    widget.customer['status'] == 'active'
+                                        ? 'Active'
+                                        : 'Inactive',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
@@ -296,9 +321,14 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
                                 ),
                                 const SizedBox(width: 8),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: AppColors.primaryBlue.withOpacity(0.1),
+                                    color: AppColors.primaryBlue.withValues(
+                                      alpha: 0.1,
+                                    ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
@@ -332,10 +362,7 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
               const SizedBox(height: 8),
               const Text(
                 'Update the customer details below',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                ),
+                style: TextStyle(color: Colors.grey, fontSize: 16),
               ),
               const SizedBox(height: 24),
 
@@ -462,7 +489,8 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
                   prefixIcon: Icon(Icons.note),
                   border: OutlineInputBorder(),
                   alignLabelWithHint: true,
-                  helperText: 'Any special instructions or notes about this customer',
+                  helperText:
+                      'Any special instructions or notes about this customer',
                 ),
               ),
               const SizedBox(height: 32),
@@ -482,7 +510,7 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
                   Expanded(
                     child: RoundedButton(
                       text: 'Update Customer',
-                      onPressed: (){},
+                      onPressed: () {},
                       backgroundColor: AppColors.primaryBlue,
                     ),
                   ),

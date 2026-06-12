@@ -40,25 +40,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
       'productName': "Mineral Water 1L",
       'currentStock': 5,
       'minStockLevel': 20,
-      'category': "Beverages"
+      'category': "Beverages",
     },
     {
       'productName': "Glass Bottles",
       'currentStock': 8,
       'minStockLevel': 15,
-      'category': "Packaging"
+      'category': "Packaging",
     },
     {
       'productName': "Water Dispensers",
       'currentStock': 3,
       'minStockLevel': 10,
-      'category': "Equipment"
+      'category': "Equipment",
     },
     {
       'productName': "5 Gallon Jugs",
       'currentStock': 12,
       'minStockLevel': 25,
-      'category': "Containers"
+      'category': "Containers",
     },
   ];
 
@@ -68,40 +68,60 @@ class _DashboardScreenState extends State<DashboardScreen> {
       'activity': "New order #1247 placed",
       'time': "5 min ago",
       'user': "Customer: John Doe",
-      'type': "order"
+      'type': "order",
     },
     {
       'activity': "Payment received for order #1246",
       'time': "15 min ago",
       'user': "Customer: Sarah Smith",
-      'type': "payment"
+      'type': "payment",
     },
     {
       'activity': "Stock updated - Mineral Water",
       'time': "1 hour ago",
       'user': "Admin: You",
-      'type': "stock"
+      'type': "stock",
     },
     {
       'activity': "New delivery agent registered",
       'time': "2 hours ago",
       'user': "Agent: Mike Johnson",
-      'type': "user"
+      'type': "user",
     },
     {
       'activity': "Monthly report generated",
       'time': "3 hours ago",
       'user': "System",
-      'type': "report"
+      'type': "report",
     },
   ];
 
   // Quick Stats
   final List<Map<String, dynamic>> _quickStats = [
-    {'title': 'Today\'s Orders', 'value': '47', 'change': '+12%', 'isPositive': true},
-    {'title': 'Revenue Today', 'value': '\$3,847000', 'change': '+8%', 'isPositive': true},
-    {'title': 'Active Deliveries', 'value': '18', 'change': '-2%', 'isPositive': false},
-    {'title': 'Customer Satisfaction', 'value': '94%', 'change': '+3%', 'isPositive': true},
+    {
+      'title': 'Today\'s Orders',
+      'value': '47',
+      'change': '+12%',
+      'isPositive': true,
+    },
+    {
+      'title': 'Revenue Today',
+      'value': '\$3,847000',
+      'change': '+8%',
+      'isPositive': true,
+    },
+    {
+      'title': 'Active Deliveries',
+      'value': '18',
+      'change': '-2%',
+      'isPositive': false,
+    },
+    {
+      'title': 'Customer Satisfaction',
+      'value': '94%',
+      'change': '+3%',
+      'isPositive': true,
+    },
   ];
 
   IconData _getActivityIcon(String type) {
@@ -149,9 +169,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
-        drawer: AppDrawer(),
+      drawer: AppDrawer(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -175,7 +195,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             _buildStockAlerts(),
             const SizedBox(height: 20),
             _buildRecentActivity(),
-
           ],
         ),
       ),
@@ -247,7 +266,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withOpacity(0.1),
+                color: Colors.blue.withValues(alpha: 0.1),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -278,9 +297,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: stat['isPositive'] ? Colors.green.shade50 : Colors.red.shade50,
+                      color: stat['isPositive']
+                          ? Colors.green.shade50
+                          : Colors.red.shade50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -308,7 +332,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 15,
             offset: const Offset(0, 6),
           ),
@@ -390,14 +414,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildMetricCard(String title, String value, IconData icon, Color color) {
+  Widget _buildMetricCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -440,7 +469,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 15,
             offset: const Offset(0, 6),
           ),
@@ -493,7 +522,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 15,
             offset: const Offset(0, 6),
           ),
@@ -541,24 +570,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildStockAlertItem(Map<String, dynamic> alert) {
-    final color = _getStockAlertColor(alert['currentStock'], alert['minStockLevel']);
+    final color = _getStockAlertColor(
+      alert['currentStock'],
+      alert['minStockLevel'],
+    );
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
           Container(
             width: 8,
             height: 8,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -574,17 +603,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 Text(
                   'Stock: ${alert['currentStock']} / ${alert['minStockLevel']}',
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(color: color, fontSize: 12),
                 ),
                 Text(
                   alert['category'],
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 10,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 10),
                 ),
               ],
             ),
@@ -606,7 +629,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             blurRadius: 15,
             offset: const Offset(0, 6),
           ),
@@ -631,7 +654,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           const SizedBox(height: 16),
-          ..._recentActivities.map((activity) => _buildActivityItem(activity)).toList(),
+          ..._recentActivities
+              .map((activity) => _buildActivityItem(activity))
+              .toList(),
         ],
       ),
     );
@@ -668,17 +693,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 const SizedBox(height: 4),
                 Text(
                   activity['user'],
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
                 ),
                 Text(
                   activity['time'],
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 10,
-                  ),
+                  style: const TextStyle(color: Colors.grey, fontSize: 10),
                 ),
               ],
             ),

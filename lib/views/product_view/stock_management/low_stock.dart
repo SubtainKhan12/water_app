@@ -80,16 +80,23 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
     }).toList();
   }
 
-  int get _highUrgencyCount => _lowStockProducts.where((p) => p['urgency'] == 'high').length;
-  int get _mediumUrgencyCount => _lowStockProducts.where((p) => p['urgency'] == 'medium').length;
-  int get _lowUrgencyCount => _lowStockProducts.where((p) => p['urgency'] == 'low').length;
+  int get _highUrgencyCount =>
+      _lowStockProducts.where((p) => p['urgency'] == 'high').length;
+  int get _mediumUrgencyCount =>
+      _lowStockProducts.where((p) => p['urgency'] == 'medium').length;
+  int get _lowUrgencyCount =>
+      _lowStockProducts.where((p) => p['urgency'] == 'low').length;
 
   void _restockProduct(String productId, int quantity) {
     setState(() {
-      final productIndex = _lowStockProducts.indexWhere((p) => p['id'] == productId);
+      final productIndex = _lowStockProducts.indexWhere(
+        (p) => p['id'] == productId,
+      );
       if (productIndex != -1) {
         _lowStockProducts[productIndex]['stock'] = quantity;
-        _lowStockProducts[productIndex]['lastRestocked'] = DateTime.now().toIso8601String().split('T')[0];
+        _lowStockProducts[productIndex]['lastRestocked'] = DateTime.now()
+            .toIso8601String()
+            .split('T')[0];
         _lowStockProducts[productIndex]['urgency'] = 'low';
       }
     });
@@ -107,7 +114,9 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Contact Supplier'),
-        content: Text('Would you like to contact $supplier regarding $productName?'),
+        content: Text(
+          'Would you like to contact $supplier regarding $productName?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -243,9 +252,7 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
           _buildUrgencyFilter(),
 
           // Alerts List
-          Expanded(
-            child: _buildAlertsList(),
-          ),
+          Expanded(child: _buildAlertsList()),
         ],
       ),
     );
@@ -273,10 +280,7 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
                 ),
                 Text(
                   '${_lowStockProducts.length} products need attention',
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 14,
-                  ),
+                  style: const TextStyle(color: Colors.red, fontSize: 14),
                 ),
               ],
             ),
@@ -311,8 +315,10 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
           final isSelected = _selectedUrgency == urgency;
           final count = urgency == 'All'
               ? _lowStockProducts.length
-              : urgency == 'High' ? _highUrgencyCount
-              : urgency == 'Medium' ? _mediumUrgencyCount
+              : urgency == 'High'
+              ? _highUrgencyCount
+              : urgency == 'Medium'
+              ? _mediumUrgencyCount
               : _lowUrgencyCount;
 
           return Expanded(
@@ -324,12 +330,19 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 4),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 8,
+                ),
                 decoration: BoxDecoration(
-                  color: isSelected ? _getUrgencyColor(urgency.toLowerCase()) : Colors.white,
+                  color: isSelected
+                      ? _getUrgencyColor(urgency.toLowerCase())
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: isSelected ? _getUrgencyColor(urgency.toLowerCase()) : Colors.grey.shade300,
+                    color: isSelected
+                        ? _getUrgencyColor(urgency.toLowerCase())
+                        : Colors.grey.shade300,
                   ),
                 ),
                 child: Column(
@@ -337,7 +350,9 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
                     Text(
                       count.toString(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : _getUrgencyColor(urgency.toLowerCase()),
+                        color: isSelected
+                            ? Colors.white
+                            : _getUrgencyColor(urgency.toLowerCase()),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -383,10 +398,7 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
             const SizedBox(height: 8),
             const Text(
               'All products are well stocked',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 14,
-              ),
+              style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],
         ),
@@ -414,148 +426,166 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: urgencyColor, width: 4 ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header with urgency
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: urgencyColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    _getUrgencyText(product['urgency']),
-                    style: TextStyle(
-                      color: urgencyColor,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                if (isOutOfStock)
+          border: Border.all(color: urgencyColor, width: 4),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header with urgency
+              Row(
+                children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: urgencyColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
-                      'OUT OF STOCK',
+                    child: Text(
+                      _getUrgencyText(product['urgency']),
                       style: TextStyle(
-                        color: Colors.red,
+                        color: urgencyColor,
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Product Info
-            Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryBlue.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(
-                    _getProductIcon(product['category']),
-                    color: AppColors.primaryBlue,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product['name'],
-                        style: const TextStyle(
+                  const Spacer(),
+                  if (isOutOfStock)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text(
+                        'OUT OF STOCK',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.DarkBlue,
-                          fontSize: 16,
                         ),
                       ),
-                      Text(
-                        product['category'],
-                        style: const TextStyle(
-                          color: AppColors.skyBlue,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Stock Information
-            Row(
-              children: [
-                _buildStockInfo('Current Stock', '${product['stock']} ${product['unit']}', urgencyColor),
-                _buildStockInfo('Minimum Required', '${product['minStock']} ${product['unit']}', Colors.grey),
-                _buildStockInfo('Deficit', '$stockDeficit ${product['unit']}', Colors.red),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Supplier Info
-            Text(
-              'Supplier: ${product['supplier']}',
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+                    ),
+                ],
               ),
-            ),
-            const SizedBox(height: 12),
+              const SizedBox(height: 12),
 
-            // Action Buttons
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () => _contactSupplier(product['supplier'], product['name']),
-                    icon: const Icon(Icons.contact_phone, size: 16),
-                    label: const Text('Contact Supplier'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primaryBlue,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+              // Product Info
+              Row(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBlue.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      _getProductIcon(product['category']),
+                      color: AppColors.primaryBlue,
+                      size: 20,
                     ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () => _quickRestock(product),
-                    icon: const Icon(Icons.inventory, size: 16),
-                    label: const Text('Quick Restock'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryBlue,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product['name'],
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.DarkBlue,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          product['category'],
+                          style: const TextStyle(
+                            color: AppColors.skyBlue,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Stock Information
+              Row(
+                children: [
+                  _buildStockInfo(
+                    'Current Stock',
+                    '${product['stock']} ${product['unit']}',
+                    urgencyColor,
+                  ),
+                  _buildStockInfo(
+                    'Minimum Required',
+                    '${product['minStock']} ${product['unit']}',
+                    Colors.grey,
+                  ),
+                  _buildStockInfo(
+                    'Deficit',
+                    '$stockDeficit ${product['unit']}',
+                    Colors.red,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Supplier Info
+              Text(
+                'Supplier: ${product['supplier']}',
+                style: const TextStyle(color: Colors.grey, fontSize: 12),
+              ),
+              const SizedBox(height: 12),
+
+              // Action Buttons
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => _contactSupplier(
+                        product['supplier'],
+                        product['name'],
+                      ),
+                      icon: const Icon(Icons.contact_phone, size: 16),
+                      label: const Text('Contact Supplier'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primaryBlue,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () => _quickRestock(product),
+                      icon: const Icon(Icons.inventory, size: 16),
+                      label: const Text('Quick Restock'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryBlue,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 
@@ -564,13 +594,7 @@ class _LowStockAlertScreenState extends State<LowStockAlertScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 10,
-            ),
-          ),
+          Text(label, style: const TextStyle(color: Colors.grey, fontSize: 10)),
           const SizedBox(height: 2),
           Text(
             value,

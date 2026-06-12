@@ -4,7 +4,6 @@ import 'package:water_app/views/customer_management/create_customer.dart';
 import '../../res/colors.dart';
 import 'customer_detail.dart';
 
-
 class CustomersScreen extends StatefulWidget {
   const CustomersScreen({super.key});
 
@@ -12,7 +11,8 @@ class CustomersScreen extends StatefulWidget {
   State<CustomersScreen> createState() => _CustomersScreenState();
 }
 
-class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProviderStateMixin {
+class _CustomersScreenState extends State<CustomersScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
@@ -113,9 +113,7 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
   void _openAddCustomer() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const CreateCustomerScreen(),
-      ),
+      MaterialPageRoute(builder: (context) => const CreateCustomerScreen()),
     ).then((value) {
       if (value != null && value == true) {
         // Refresh customer list if new customer was added
@@ -194,7 +192,10 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey.shade300),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
             ),
           ),
         ),
@@ -215,10 +216,7 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
               ),
               Text(
                 'Active: ${_customers.where((c) => c['status'] == 'active').length}',
-                style: const TextStyle(
-                  color: Colors.green,
-                  fontSize: 12,
-                ),
+                style: const TextStyle(color: Colors.green, fontSize: 12),
               ),
             ],
           ),
@@ -229,13 +227,13 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
           child: _filteredCustomers.isEmpty
               ? _buildEmptyState()
               : ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: _filteredCustomers.length,
-            itemBuilder: (context, index) {
-              final customer = _filteredCustomers[index];
-              return _buildCustomerCard(customer);
-            },
-          ),
+                  padding: const EdgeInsets.all(16),
+                  itemCount: _filteredCustomers.length,
+                  itemBuilder: (context, index) {
+                    final customer = _filteredCustomers[index];
+                    return _buildCustomerCard(customer);
+                  },
+                ),
         ),
       ],
     );
@@ -256,19 +254,14 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
             _searchQuery.isNotEmpty
                 ? 'No customers found for "$_searchQuery"'
                 : 'No customers available',
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 16,
-            ),
+            style: const TextStyle(color: Colors.grey, fontSize: 16),
           ),
           if (_searchQuery.isEmpty)
             TextButton(
               onPressed: _openAddCustomer,
               child: const Text(
                 'Add First Customer',
-                style: TextStyle(
-                  color: AppColors.primaryBlue,
-                ),
+                style: TextStyle(color: AppColors.primaryBlue),
               ),
             ),
         ],
@@ -293,7 +286,7 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryBlue.withOpacity(0.1),
+                  color: AppColors.primaryBlue.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -321,13 +314,20 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
-                            color: customer['status'] == 'active' ? Colors.green : Colors.grey,
+                            color: customer['status'] == 'active'
+                                ? Colors.green
+                                : Colors.grey,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            customer['status'] == 'active' ? 'Active' : 'Inactive',
+                            customer['status'] == 'active'
+                                ? 'Active'
+                                : 'Inactive',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
@@ -340,18 +340,12 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
                     const SizedBox(height: 4),
                     Text(
                       customer['phone'],
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 14),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       customer['email'],
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],
                 ),
@@ -372,14 +366,14 @@ class _CustomersScreenState extends State<CustomersScreen> with SingleTickerProv
                   const SizedBox(height: 4),
                   Text(
                     '${customer['totalOrders']} orders',
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                   const SizedBox(height: 4),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: customer['currentBalance'] == 0
                           ? Colors.grey
